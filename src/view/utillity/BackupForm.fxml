@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="275.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.utillity.BackupFormContoller">
+   <children>
+      <TextField fx:id="txtLocation" editable="false" layoutX="136.0" layoutY="99.0" prefHeight="31.0" prefWidth="323.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TextField>
+      <Button layoutX="475.0" layoutY="99.0" mnemonicParsing="false" onAction="#btnBrowseOnAction" prefHeight="31.0" prefWidth="87.0" text="Browse">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBackUp" layoutX="475.0" layoutY="166.0" mnemonicParsing="false" onAction="#btnBackUpOnAction" prefHeight="31.0" prefWidth="87.0" text="BackUp">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtFileName" layoutX="134.0" layoutY="32.0" prefHeight="31.0" prefWidth="430.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TextField>
+      <Label fx:id="lblFileName" layoutX="33.0" layoutY="37.0" prefHeight="21.0" prefWidth="87.0" text="File name  :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPath" layoutX="33.0" layoutY="104.0" prefHeight="21.0" prefWidth="87.0" text="path          :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="checkboxRestore" layoutX="148.0" layoutY="171.0" mnemonicParsing="false" onAction="#checkboxRestoreOnAction" text="Restore Backup" visible="false" />
+      <Button fx:id="btnRestore" layoutX="305.0" layoutY="166.0" mnemonicParsing="false" onAction="#btnRestoreOnAction" prefHeight="31.0" prefWidth="148.0" text="Restore Backup" visible="false">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <JFXProgressBar fx:id="progresbar" layoutX="21.0" layoutY="221.0" prefHeight="15.0" prefWidth="554.0" progress="0.0" style="-fx-progress-color:  #1897C8" />
+   </children>
+</AnchorPane>

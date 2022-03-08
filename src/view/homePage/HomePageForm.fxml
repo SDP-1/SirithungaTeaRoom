@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="homePageAnkerPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.homePage.HomePageFormContoller">
+    <children>
+        <BorderPane prefHeight="1080.0" prefWidth="1920.0">
+            <top>
+                <MenuBar BorderPane.alignment="CENTER">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Exit">
+                            <items>
+                                <MenuItem fx:id="itemLogOut" mnemonicParsing="false" onAction="#LogoutOnAction" text="Log Out" />
+                        <MenuItem fx:id="itemExit" mnemonicParsing="false" onAction="#ExitOnAction" text="Exit" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Utility">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#itemBackupOnAction" text="BackUp" />
+                        <MenuItem mnemonicParsing="false" onAction="#manageCustomerOnAction" text="Manage Customer" />
+                        <MenuItem fx:id="itemCalc" mnemonicParsing="false" onAction="#itemCalcOnAction" text="Calculator" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem fx:id="itemShortcut" mnemonicParsing="false" onAction="#menuItemShortcutKeyOnAction" text="shortcut" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </top>
+            <center>
+                <AnchorPane prefHeight="941.0" prefWidth="1752.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane prefHeight="97.0" prefWidth="1920.0" style="-fx-background-color: #507280;">
+                            <children>
+                                <JFXHamburger fx:id="hmbHamburger" layoutX="14.0" layoutY="63.0" />
+                                <Label layoutX="657.0" layoutY="14.0" prefHeight="70.0" prefWidth="607.0" text="SIRITHUNGA GROCERY" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="40.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="1631.0" layoutY="31.0" text="Time" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblSystemTime" alignment="CENTER" layoutX="1685.0" layoutY="25.0" opacity="0.8" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="1336.0" layoutY="31.0" text="Date" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblSystemDate" alignment="CENTER" layoutX="1390.0" layoutY="25.0" opacity="0.8" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </Pane>
+                        <AnchorPane fx:id="mainTaskOpenPain" layoutY="97.0" prefHeight="952.0" prefWidth="1920.0" />
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+        <JFXDrawer fx:id="drawerOptions" layoutY="128.0" prefHeight="953.0" prefWidth="250.0" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="952.0" prefWidth="1920.0" style="-fx-background-color: #1897C8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.LastBillFormContoller">
+   <children>
+      <Pane prefHeight="77.0" prefWidth="1927.0" style="-fx-background-color: #297BD7;">
+         <children>
+            <Label fx:id="lblSaleType" layoutX="610.0" layoutY="11.0" prefHeight="56.0" prefWidth="213.0" text="See Bill" textFill="WHITE">
+               <font>
+                  <Font name="Eras Bold ITC" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="731.0" layoutY="94.0" prefHeight="845.0" prefWidth="1180.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="21.0" layoutY="22.0" prefHeight="25.0" prefWidth="162.0" text="Invoice No             - ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="62.0" prefHeight="25.0" prefWidth="162.0" text="Customer Name    - ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="108.0" prefHeight="25.0" prefWidth="162.0" text="Sale Type               - ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="701.0" layoutY="22.0" prefHeight="25.0" prefWidth="54.0" text="Date -">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="904.0" layoutY="22.0" prefHeight="25.0" prefWidth="71.0" text="Time - ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="701.0" layoutY="62.0" prefHeight="25.0" prefWidth="133.0" text="Paid Statement - ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TableView layoutX="16.0" layoutY="156.0" prefHeight="578.0" prefWidth="1149.0">
+              <columns>
+                <TableColumn prefWidth="60.0" text="No" />
+                <TableColumn prefWidth="100.0" text="Code1" />
+                  <TableColumn prefWidth="65.0" text="Code2" />
+                  <TableColumn prefWidth="475.0" text="Code2" />
+                  <TableColumn prefWidth="120.0" text="QTY" />
+                  <TableColumn prefWidth="150.0" text="SalePrice" />
+                  <TableColumn prefWidth="150.0" text="Next Amount" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <TableView layoutX="14.0" layoutY="185.0" prefHeight="754.0" prefWidth="702.0">
+        <columns>
+          <TableColumn editable="false" prefWidth="73.99996948242188" sortable="false" text="No" />
+          <TableColumn editable="false" prefWidth="148.0" sortable="false" text="Invoice No" />
+            <TableColumn editable="false" prefWidth="150.0" sortable="false" text="Date" />
+            <TableColumn editable="false" prefWidth="150.0" sortable="false" text="Time" />
+            <TableColumn editable="false" prefWidth="152.0" sortable="false" text="Customer" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="cmbSelect" layoutX="14.0" layoutY="116.0" prefHeight="39.0" prefWidth="223.0" />
+      <CheckBox layoutX="264.0" layoutY="84.0" mnemonicParsing="false" text="Advance Search" />
+      <TextField fx:id="txtSearch" layoutX="247.0" layoutY="116.0" prefHeight="39.0" prefWidth="473.0" promptText="Search" style="-fx-background-radius: 20;">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="55.0" />
+         </padding>
+      </TextField>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="264.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/hamburgerOpenPage/search2.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

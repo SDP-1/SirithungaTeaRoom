@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="vBoxOwnerOptions" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#exsit" prefHeight="953.0" prefWidth="250.0" spacing="40.0" style="-fx-background-color: #507280;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.homePage.OwnerHamburgerFormcontoller">
+   <children>
+      <Button fx:id="btnSale" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSaleOnAction" onMouseEntered="#asddBillMouseEnted" onMouseExited="#addBillMouseOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="Sale" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/sale.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btnseeBill" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSeeBillOnAction" onMouseEntered="#seeBillMouseEnted" onMouseExited="#seeBillMouseOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="See Bill" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/seeBill.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btnSearch" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSearchItemOnAction" onMouseEntered="#searchItemMouseEnted" onMouseExited="#searchItemMouseOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="Supplier Master" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/Supplier.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btnAddDeleteItem" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnAddDeleteItemOnAction" onMouseEntered="#addDeleteMouseItemEnted" onMouseExited="#addDeleteMouseItemOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="Manage Item" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/addItem.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btnMasterReport" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnMasterReportOnAction" onMouseEntered="#masterReportMouseEnted" onMouseExited="#masterReportMouseOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="Master Report" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/coin.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnAddDeleteUser" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnAddDeleteUserOnAction" onMouseEntered="#addDeleteUserMouseEnted" onMouseExited="#addDeleteUserMouseOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="Manage  User" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/addUser.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btnExit" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnExitOnAction" onMouseEntered="#exitMouseEnted" onMouseExited="#exitMouseOut" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #507280;" text="Exit " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="81.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../image/hamburgerOpenPage/exist.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</VBox>

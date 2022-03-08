@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="412.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.LoginPageFormContoller">
+   <children>
+      <ImageView fitHeight="412.0" fitWidth="705.0" layoutX="-7.0" mouseTransparent="true" pickOnBounds="true">
+         <image>
+            <Image url="@../image/login.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="320.0" layoutY="55.0" prefHeight="303.0" prefWidth="336.0">
+         <children>
+            <Pane layoutX="17.0" layoutY="76.0" prefHeight="205.0" prefWidth="303.0">
+               <children>
+                  <PasswordField fx:id="pwdPassword" layoutX="12.0" layoutY="77.0" onAction="#pwdPasswordOnAction" onKeyPressed="#passwordKeyPress" prefHeight="35.0" prefWidth="282.0" style="-fx-background-radius: 20;">
+                     <padding>
+                        <Insets left="38.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </PasswordField>
+                  <Label fx:id="lblShowPassword" layoutX="262.0" layoutY="85.0" onMousePressed="#showPassword" onMouseReleased="#hidePassword" prefHeight="20.0" prefWidth="20.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/loginpage/noHide.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="22.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/loginpage/pwd.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblPwdShow" layoutX="55.0" layoutY="81.0" prefHeight="27.0" prefWidth="207.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnLogin" layoutX="11.0" layoutY="143.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="35.0" prefWidth="282.0" style="-fx-background-color: #1897C8; -fx-background-radius: 20;" text="Log in" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="txtUserName" layoutX="12.0" layoutY="14.0" onAction="#txtUserNameOnAction" onKeyPressed="#userNameKeyPress" prefHeight="35.0" prefWidth="282.0" style="-fx-background-radius: 20;">
+                     <padding>
+                        <Insets left="38.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="22.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/loginpage/user.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="45.0" layoutY="14.0" prefHeight="51.0" prefWidth="247.0">
+               <children>
+                  <Label layoutX="78.0" layoutY="-3.0" text="SIGN IN" textFill="#2c5060">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="28.0" text="TO ACCESS THE PORTAL" textFill="#2c5060">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="678.0" layoutY="7.0" onMouseClicked="#closeOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/close.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="952.0" prefWidth="1920.0" style="-fx-background-color: #1897C8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.SeeBillFormContoller">
+   <children>
+      <Pane prefHeight="77.0" prefWidth="1927.0" style="-fx-background-color: #297BD7;">
+         <children>
+            <Label layoutX="610.0" layoutY="11.0" prefHeight="56.0" prefWidth="213.0" text="See Bill" textFill="WHITE">
+               <font>
+                  <Font name="Eras Bold ITC" size="48.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtDeleteOrderInvoiceNumber" layoutX="1594.0" layoutY="21.0" onAction="#txtDeleteOrderInvoiceNumberOnAction" onKeyTyped="#txtDeleteInvoiceNumberOnKeyType" promptText="Enter Invoice Number" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btnOrderDeleteButton" layoutX="1819.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnOrderDeleteButtonOnAction" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #E65B65;" text="Delete" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDeleteReqCancel" layoutX="1425.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnDeleteReqCancelOnAction" prefHeight="37.0" prefWidth="158.0" style="-fx-background-color: #4ED964;" text="Delete req cancel" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="731.0" layoutY="94.0" prefHeight="845.0" prefWidth="1180.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="21.0" layoutY="22.0" prefHeight="27.0" prefWidth="172.0" text="Invoice No             - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="62.0" prefHeight="27.0" prefWidth="172.0" text="Customer Name    - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="108.0" prefHeight="27.0" prefWidth="172.0" text="Sale Type               - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="701.0" layoutY="22.0" prefHeight="25.0" prefWidth="54.0" text="Date -">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="923.0" layoutY="22.0" prefHeight="25.0" prefWidth="71.0" text="Time - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="701.0" layoutY="62.0" prefHeight="26.0" prefWidth="149.0" text="Paid Statement - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblOrderDeatils" layoutX="16.0" layoutY="156.0" prefHeight="578.0" prefWidth="1149.0">
+              <columns>
+                <TableColumn fx:id="clmT2No" editable="false" prefWidth="60.0" sortable="false" text="No" />
+                <TableColumn fx:id="clmT2Code1" editable="false" prefWidth="100.0" sortable="false" text="Code1" />
+                  <TableColumn fx:id="clmT2Code2" editable="false" prefWidth="85.0" sortable="false" text="Code2" />
+                  <TableColumn fx:id="clmT2Description" editable="false" prefWidth="455.0" sortable="false" text="Description" />
+                  <TableColumn fx:id="clmT2Qty" editable="false" prefWidth="120.0" sortable="false" text="QTY" />
+                  <TableColumn fx:id="clmT2SalePrice" editable="false" prefWidth="150.0" sortable="false" text="SalePrice" />
+                  <TableColumn fx:id="clmT2NextAmount" editable="false" prefWidth="150.0" sortable="false" text="Next Amount" />
+              </columns>
+            </TableView>
+            <Label layoutX="577.0" layoutY="757.0" prefHeight="25.0" prefWidth="94.0" text="Cash       - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="577.0" layoutY="799.0" prefHeight="25.0" prefWidth="94.0" text="Balance  -">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="904.0" layoutY="757.0" prefHeight="25.0" prefWidth="108.0" text="Full Cost   - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="904.0" layoutY="799.0" prefHeight="25.0" prefWidth="108.0" text="Descount  -">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblInvoiceNo" layoutX="216.0" layoutY="23.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCustomerName" layoutX="216.0" layoutY="62.0" prefHeight="26.0" prefWidth="276.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSaleType" layoutX="216.0" layoutY="109.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDate" layoutX="762.0" layoutY="22.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTime" layoutX="994.0" layoutY="22.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPaymentStatement" layoutX="857.0" layoutY="62.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblFullCost" layoutX="1012.0" layoutY="757.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDescount" layoutX="1012.0" layoutY="799.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCash" layoutX="678.0" layoutY="757.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblBalance" layoutX="678.0" layoutY="799.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="276.0" layoutY="757.0" prefHeight="26.0" prefWidth="133.0" text="No Of Items   - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNoOfItems" layoutX="416.0" layoutY="757.0" prefHeight="26.0" prefWidth="133.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSetPaid" layoutX="857.0" layoutY="108.0" mnemonicParsing="false" onAction="#btnSetPaidOnAction" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #1897C8; -fx-background-radius: 20;" text="Set Paid" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#SetPaindAndPrintConfirmationReportOnAction" text="Set Paind And Print Confirmation Report" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </Button>
+            <Button fx:id="btnPrint" layoutX="16.0" layoutY="795.0" mnemonicParsing="false" onAction="#btnPrintOnAction" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #297BD7;" text="Print" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <TableView fx:id="tblOrdes" layoutX="14.0" layoutY="185.0" prefHeight="754.0" prefWidth="702.0">
+        <columns>
+          <TableColumn fx:id="clmT1No" editable="false" prefWidth="60.0" sortable="false" text="No" />
+          <TableColumn fx:id="clmT1InvoiceNo" editable="false" prefWidth="135.0" sortable="false" text="Invoice No" />
+            <TableColumn fx:id="clmT1Date" editable="false" prefWidth="145.0" sortable="false" text="Date" />
+            <TableColumn fx:id="clmT1Time" editable="false" prefWidth="145.0" sortable="false" text="Time" />
+            <TableColumn fx:id="clmT1Customer" editable="false" prefWidth="152.0" sortable="false" text="Customer" />
+            <TableColumn fx:id="clmT1IsLone" editable="false" prefWidth="35.0" sortable="false" text="*" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="cmbxSelectCatagary" layoutX="14.0" layoutY="116.0" prefHeight="39.0" prefWidth="266.0" />
+      <CheckBox fx:id="chbAdvanceSearch" layoutX="289.0" layoutY="84.0" mnemonicParsing="false" onAction="#chbAdvanceSearchOnAction" text="Advance Search" />
+      <TextField fx:id="txtSearch" disable="true" layoutX="289.0" layoutY="116.0" onAction="#txtSearchOnAction" prefHeight="39.0" prefWidth="431.0" promptText="Search" style="-fx-background-radius: 20;">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="55.0" />
+         </padding>
+      </TextField>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="308.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/hamburgerOpenPage/search2.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

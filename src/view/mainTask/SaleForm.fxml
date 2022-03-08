@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onKeyPressed="#saleRAnkerPaneKeyPress" prefHeight="952.0" prefWidth="1920.0" style="-fx-background-color: #1897C8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.SaleFormContoller">
+   <children>
+      <Pane prefHeight="77.0" prefWidth="1927.0" style="-fx-background-color: #297BD7;">
+         <children>
+            <Label layoutX="1126.0" layoutY="25.0" text="Invoice" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblInvoiceNumber" alignment="CENTER" layoutX="1202.0" layoutY="19.0" opacity="0.8" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCashierName" layoutX="101.0" layoutY="19.0" prefHeight="39.0" prefWidth="180.0" style="-fx-background-color: #ffffff;">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="24.0" layoutY="25.0" text="Cashier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSaleType" layoutX="610.0" layoutY="11.0" prefHeight="56.0" prefWidth="213.0" text="Sale - R" textFill="WHITE">
+               <font>
+                  <Font name="Eras Bold ITC" size="48.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnChangeSaleType" layoutX="1752.0" layoutY="19.0" onAction="#btnChangeSaleTypeOnAction" prefHeight="39.0" prefWidth="151.0" style="-fx-background-color: #CFE3F7; -fx-background-radius: 20;" text="Whole Sale">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <CheckBox fx:id="chbSaleTypeChangEnShuwer" layoutX="1716.0" layoutY="29.0" mnemonicParsing="false" onAction="#chbSaleTypeChangEnShuwerOnAction" />
+         </children>
+      </Pane>
+      <Pane layoutY="77.0" prefHeight="877.0" prefWidth="1927.0">
+         <children>
+            <TextField fx:id="txtBarCode" layoutX="14.0" layoutY="34.0" onAction="#txtCodeOnAction" onKeyPressed="#bacodeOnKeyPress" onKeyTyped="#codeKeyType" onMouseClicked="#codeClick" prefHeight="39.0" prefWidth="285.0">
+               <padding>
+                  <Insets left="65.0" />
+               </padding>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label layoutX="23.0" layoutY="40.0" text="Code :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtQty" layoutX="344.0" layoutY="34.0" onAction="#txtQtyOnAction" onKeyTyped="#qtyKeyType" prefHeight="39.0" prefWidth="115.0">
+               <padding>
+                  <Insets left="53.0" />
+               </padding>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label layoutX="351.0" layoutY="40.0" text="Qty :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtMarkPrice" layoutX="491.0" layoutY="34.0" onAction="#txtMarkPriceOnAction" onKeyTyped="#MarkPriceKeyType" prefHeight="39.0" prefWidth="151.0">
+               <padding>
+                  <Insets left="63.0" />
+               </padding>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label layoutX="496.0" layoutY="40.0" text="Mark :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtRetailPrice" layoutX="673.0" layoutY="34.0" onAction="#txtRetailPriceOnAction" onKeyTyped="#retailKeyType" prefHeight="39.0" prefWidth="151.0">
+               <padding>
+                  <Insets left="63.0" />
+               </padding>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label fx:id="uplableRetil2" layoutX="682.0" layoutY="40.0" text="Rate :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="chbShowItemList" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#isOnShowItemList" prefHeight="21.0" prefWidth="166.0" text="Show itemList" textFill="WHITE" />
+            <TextField fx:id="txtPrintName" layoutX="1043.0" layoutY="34.0" onAction="#printNameOnAction" prefHeight="39.0" prefWidth="563.0">
+               <padding>
+                  <Insets left="117.0" />
+               </padding>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label layoutX="1053.0" layoutY="40.0" text="Print name :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Pane layoutX="1438.0" layoutY="108.0" prefHeight="571.0" prefWidth="475.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+               <children>
+                  <Separator layoutX="14.0" layoutY="49.0" prefHeight="3.0" prefWidth="66.0" />
+                  <Label layoutX="14.0" layoutY="20.0" text="Last Bill">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="60.0" prefHeight="496.0" prefWidth="447.0" spacing="10.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
+                     <children>
+                        <Label fx:id="lblLastBill1" alignment="TOP_LEFT" onMouseClicked="#lblLastBill1OnMouseClick" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #A8CFF7;">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblLastBill2" alignment="TOP_LEFT" onMouseClicked="#lblLastBill2OnMouseClick" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #A8CFF7;">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblLastBill3" alignment="TOP_LEFT" onMouseClicked="#lblLastBill3OnMouseClick" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #A8CFF7;">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblLastBill4" alignment="TOP_LEFT" onMouseClicked="#lblLastBill4OnMouseClick" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #A8CFF7;">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblLastBill5" alignment="TOP_LEFT" onMouseClicked="#lblLastBill5OnMouseClick" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #A8CFF7;">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+                  <JFXButton layoutX="355.0" layoutY="14.0" onAction="#btnLastBillShowOnAction" prefHeight="39.0" prefWidth="106.0" ripplerFill="WHITE" style="-fx-background-color: #297BD7; -fx-background-radius: 20;" text="Show" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="119.0" layoutY="22.0" prefHeight="27.0" prefWidth="141.0" text="Select Bil Number :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblSelectInvoiceNo" layoutX="260.0" layoutY="23.0" prefHeight="25.0" prefWidth="88.0" text="--">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDeleteDetect" layoutX="80.0" layoutY="4.0" prefHeight="21.0" prefWidth="40.0" visible="false" />
+               </children>
+            </Pane>
+            <Pane layoutX="1438.0" layoutY="699.0" prefHeight="149.0" prefWidth="475.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+               <children>
+                  <JFXButton layoutX="95.0" layoutY="101.0" onAction="#btnClearOnAction" prefHeight="39.0" prefWidth="151.0" style="-fx-background-color: #297BD7; -fx-background-radius: 20;" text="New Order" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/sale/newOrder.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton layoutX="292.0" layoutY="101.0" onAction="#btnPrintOnAction" prefHeight="39.0" prefWidth="151.0" ripplerFill="WHITE" style="-fx-background-color: #297BD7; -fx-background-radius: 20;" text="Print" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/sale/print.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#menuPrintOnAction" text="Print" />
+                              <MenuItem mnemonicParsing="false" onAction="#menuSaveCopyAndPrint" text="Save copy and print" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </JFXButton>
+                  <Label fx:id="lblNowBill" alignment="TOP_LEFT" layoutX="25.0" layoutY="7.0" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #37C9EE;">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="199.0" layoutY="816.0" text="No of Items" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtNoOfItem" layoutX="314.0" layoutY="810.0" prefHeight="39.0" prefWidth="115.0" style="-fx-background-color: #ffffff;">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="482.0" layoutY="816.0" text="Total Amount" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtTotalAmount" layoutX="613.0" layoutY="810.0" prefHeight="39.0" prefWidth="180.0" style="-fx-background-color: #ffffff;">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="857.0" layoutY="817.0" text="Cash" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="1151.0" layoutY="817.0" text="Balance" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtBalance" layoutX="1234.0" layoutY="810.0" prefHeight="39.0" prefWidth="180.0" style="-fx-background-color: #ffffff;">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtCustomerName" layoutX="1715.0" layoutY="34.0" prefHeight="39.0" prefWidth="198.0" promptText="Search Customer">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </TextField>
+            <TextField fx:id="txtCash" layoutX="912.0" layoutY="810.0" onKeyPressed="#cashOnkeypress" onKeyTyped="#cashKeyType" prefHeight="39.0" prefWidth="180.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </TextField>
+            <Label contentDisplay="RIGHT" layoutX="1620.0" layoutY="40.0" prefHeight="27.0" prefWidth="141.0" text="Customer   ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/hamburgerOpenPage/search2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <TextField fx:id="txtWholesalePrice" disable="true" layoutX="865.0" layoutY="34.0" onAction="#txtWhosalePriceOnAction" onKeyTyped="#whosaleKeyType" prefHeight="39.0" prefWidth="151.0">
+               <padding>
+                  <Insets left="63.0" />
+               </padding>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label fx:id="upLableWhosale2" disable="true" layoutX="876.0" layoutY="40.0" text="Rate :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="upLableWholesale" disable="true" layoutX="880.0" layoutY="12.0" text="Wholesale">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="upLableretail1" layoutX="694.0" layoutY="12.0" text="Retail Sale">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblSale" layoutX="14.0" layoutY="108.0" prefHeight="675.0" prefWidth="1400.0">
+               <columns>
+                  <TableColumn fx:id="clmNumber" prefWidth="60.0" sortable="false" text="NO" />
+                  <TableColumn fx:id="clmItemCode" prefWidth="150.0" sortable="false" text="Item Code" />
+                  <TableColumn fx:id="clmDescription" prefWidth="590.0" sortable="false" text="Description" />
+                  <TableColumn fx:id="clmQty" sortable="false" text="Qty" />
+                  <TableColumn fx:id="clmMarkPrice" prefWidth="165.0" sortable="false" text="Mark Price" />
+                  <TableColumn fx:id="clmPrice" prefWidth="165.0" sortable="false" text="Price" />
+                  <TableColumn fx:id="clmNextAmount" prefWidth="165.0" sortable="false" text="Next Amount" />
+               </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#tableDataDeleteOnAction" text="Delete" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+            <Button layoutX="234.0" layoutY="-1.0" mnemonicParsing="false" onAction="#btnPrimaryClearOnAction" prefHeight="20.0" prefWidth="65.0" style="-fx-background-radius: 20; -fx-background-color: #297BD7;" text="Clear" textFill="WHITE" />
+            <JFXButton fx:id="btnChangPrice" layoutX="828.0" layoutY="6.0" onAction="#continueOtherPriceOnAction" prefHeight="21.0" prefWidth="33.0" style="-fx-background-color: #297BD7;" text="--&gt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
