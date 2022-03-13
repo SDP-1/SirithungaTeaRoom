@@ -441,7 +441,6 @@ public class SaleFormContoller {
         txtWholesalePrice.clear();
         txtPrintName.clear();
         txtBarCode.requestFocus();
-        chbShowItemList.setSelected(false);
         saleTableTMData = null;
 
         if (lblSaleType.getText().equals("Sale-R")) {
@@ -464,11 +463,6 @@ public class SaleFormContoller {
             uplableRetil2.setDisable(true);
 
             btnChangPrice.setText("<--");
-        }
-
-        try {
-            stringAutoCompletionBinding.dispose();
-        } catch (NullPointerException e) {
         }
 
         chbSaleTypeChangEnShuwer.setSelected(false);
@@ -506,6 +500,9 @@ public class SaleFormContoller {
 
     private void advanceClear() {
         try {
+            chbShowItemList.setSelected(false);
+             if(stringAutoCompletionBinding!=null)stringAutoCompletionBinding.dispose();
+
             lblInvoiceNumber.setText(String.valueOf(OrderTableQuery.getNewInvoiceNo()));
             primaryClear();
             txtNoOfItem.setText("");
@@ -814,13 +811,15 @@ public class SaleFormContoller {
                     new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime()),
                     new SimpleDateFormat("hh:mm:ss aa").format(Calendar.getInstance().getTime()),
                     txtCustomerName.getText().isEmpty() ? "" : txtCustomerName.getText(),
-                    true,
+                    getSaleType(),
                     Integer.parseInt(txtNoOfItem.getText()),
                     Double.parseDouble(txtTotalAmount.getText()),
                     Double.parseDouble(txtCash.getText()),
                     Double.parseDouble(txtBalance.getText()),
                     Double.parseDouble(txtTotalAmount.getText()) > Double.parseDouble(txtCash.getText()),
-                    discount()
+                    discount(),
+                    getTotalBuyingPrice(),
+                    lblCashierName.getText()
             );
             boolean isOrderSave = OrderTableQuery.saveOrder(orderDetails);
             if (isOrderSave) {
@@ -884,7 +883,23 @@ public class SaleFormContoller {
         }
     }
 
+
+
     //-------------------------------------------------------------------END------------------------------------------------------------------------------
+    private boolean getSaleType() {
+        String saletype = lblSaleType.getText();
+        return saletype.charAt(saletype.length()-1)=='R';
+    }
+
+private double getTotalBuyingPrice(){
+        double totalBingPrice=0;
+
+        for(SaleTableTM x:list){
+            totalBingPrice += x.getBuyingPrice() * x.getQty();
+        }
+
+        return totalBingPrice;
+}
 
     public PageFormat getPageFormat(PrinterJob pj, double bHeight) {
 

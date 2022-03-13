@@ -69,7 +69,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="701.0" layoutY="62.0" prefHeight="26.0" prefWidth="149.0" text="Paid Statement - ">
+            <Label layoutX="701.0" layoutY="110.0" prefHeight="26.0" prefWidth="149.0" text="Paid Statement - ">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -130,7 +130,7 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <Label fx:id="lblPaymentStatement" layoutX="857.0" layoutY="62.0" prefHeight="26.0" prefWidth="133.0" text="--">
+            <Label fx:id="lblPaymentStatement" layoutX="863.0" layoutY="108.0" prefHeight="26.0" prefWidth="133.0" text="--">
                <font>
                   <Font size="19.0" />
                </font>
@@ -165,7 +165,7 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <Button fx:id="btnSetPaid" layoutX="857.0" layoutY="108.0" mnemonicParsing="false" onAction="#btnSetPaidOnAction" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #1897C8; -fx-background-radius: 20;" text="Set Paid" textFill="WHITE" visible="false">
+            <Button fx:id="btnSetPaid" layoutX="1040.0" layoutY="108.0" mnemonicParsing="false" onAction="#btnSetPaidOnAction" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #1897C8; -fx-background-radius: 20;" text="Set Paid" textFill="WHITE" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -182,6 +182,16 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
+            <Label layoutX="701.0" layoutY="62.0" prefHeight="26.0" prefWidth="149.0" text="Cashier - ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCashiername" layoutX="857.0" layoutY="62.0" prefHeight="28.0" prefWidth="258.0" text="--">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <TableView fx:id="tblOrdes" layoutX="14.0" layoutY="185.0" prefHeight="754.0" prefWidth="702.0">
@@ -209,5 +219,6 @@
             <Image url="@../../image/hamburgerOpenPage/search2.png" />
          </image>
       </ImageView>
+      <CheckBox fx:id="chbOlderThan3Month" layoutX="438.0" layoutY="84.0" mnemonicParsing="false" onAction="#chbOlderThan3MonthOnAction" text="Older than 3 months" visible="false" />
    </children>
 </AnchorPane>

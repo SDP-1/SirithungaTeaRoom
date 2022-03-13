@@ -10,8 +10,12 @@ import java.sql.SQLException;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Locale;
 
 public class OrderTableQuery {
+    private static LinkedHashMap<String , Integer> monthNumber = new LinkedHashMap();
+
 
     public static int getNewInvoiceNo() throws SQLException, ClassNotFoundException {
 
@@ -33,7 +37,7 @@ public class OrderTableQuery {
     }
 
     public static boolean saveOrder(OrderDetails od) throws SQLException, ClassNotFoundException {
-        boolean b = CrudUtil.excecute("INSERT INTO `order` VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        boolean b = CrudUtil.excecute("INSERT INTO `order` VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 od.getInvoiceNo(),
                 od.getDate(),
                 od.getTime(),
@@ -44,7 +48,9 @@ public class OrderTableQuery {
                 od.getCash(),
                 od.getBalance(),
                 od.isOnLoan(),
-                od.getDiscount()
+                od.getDiscount(),
+                od.getTotalBingPrice(),
+                od.getCashiyer()
         );
         setUpper();
         return b;
@@ -182,7 +188,9 @@ public class OrderTableQuery {
                     resultSet.getDouble(8),
                     resultSet.getDouble(9),
                     resultSet.getBoolean(10),
-                    resultSet.getDouble(11)
+                    resultSet.getDouble(11),
+                    resultSet.getDouble(12),
+                    resultSet.getString(13)
             );
         }
         return null;
@@ -298,12 +306,15 @@ public class OrderTableQuery {
         return months;
     }
 
-    public static ObservableList<String> getOrdersAvbledates(String month){
+    public static ObservableList<String> getOrdersAvbledates(String month,String year){
         ObservableList<String> dates =FXCollections.observableArrayList();
         dates.add("");
 
         try {
-            ResultSet resultSet = CrudUtil.excecute("SELECT DISTINCT DATE_FORMAT(date,'%d') FROM `order` WHERE MONTHNAME(date)=?",month);
+            ResultSet resultSet = CrudUtil.excecute("SELECT DISTINCT DATE_FORMAT(date,'%d') FROM `order` WHERE MONTHNAME(date)=? AND year(date)=?",
+                    month,
+                    year
+            );
 
             while (resultSet.next()){
                 dates.add(resultSet.getString(1));
@@ -317,6 +328,204 @@ public class OrderTableQuery {
 
         return dates;
     }
+
+    public static int getNoofSaleForDay (String year , String month , String date){
+        int saleCount = 0;
+
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT  COUNT(invoiceNo) FROM `order` WHERE DATE(date)=?",
+                    year+"-"+monthNumber.get(month.toUpperCase())+"-"+date
+            );
+            if(resultSet.next()){
+                saleCount = resultSet.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return saleCount;
+    }
+
+    public static int getNoofSaleForMonth(String year, String month) {
+        int saleCount =0;
+
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT  COUNT(invoiceNo) FROM `order` WHERE MONTHNAME(date)=? AND year(date)=?",
+                    month,
+                    year
+            );
+
+            if(resultSet.next()){
+                saleCount = resultSet.getInt(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return saleCount;
+    }
+
+    public static int getNoofSaleForYear(String year) {
+        int saleCount =0;
+
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT  COUNT(invoiceNo) FROM `order` WHERE year(date)=?",
+                    year
+            );
+
+            if(resultSet.next()){
+                saleCount = resultSet.getInt(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return saleCount;
+    }
+
+    public static double getRevenueForDay(String year , String month , String date){
+        double revenue = 0;
+
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT  SUM(fullCost) FROM `order` WHERE DATE(date)=?",
+                    year+"-"+monthNumber.get(month.toUpperCase())+"-"+date
+            );
+            if(resultSet.next()){
+                revenue = resultSet.getDouble(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return revenue;
+    }
+
+    public static double getRevenueForMonth(String year, String month) {
+        double revenue = 0;
+
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT  SUM(fullCost) FROM `order` WHERE MONTHNAME(date)=? AND year(date)=?",
+                    month,
+                    year
+            );
+            if(resultSet.next()){
+                revenue = resultSet.getDouble(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return revenue;
+    }
+
+    public static double getRevenueForYear(String year) {
+        double revenue = 0;
+
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT  SUM(fullCost) FROM `order` WHERE year(date)=?",
+                    year
+            );
+
+            if(resultSet.next()){
+                revenue = resultSet.getDouble(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return revenue;
+    }
+
+    public static double getCostForDay(String year , String month , String date){
+       double cost=0;
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT SUM(totalBuyingPrice) FROM `order` WHERE DATE(date)=?",
+                    year + "-" + monthNumber.get(month.toUpperCase()) + "-" + date
+            );
+
+           if(resultSet.next()){
+               cost = resultSet.getDouble(1);
+           }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cost;
+    }
+
+    public static double getCostForMonth(String year , String month){
+        double cost=0;
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT SUM(totalBuyingPrice) FROM `order` WHERE MONTHNAME(date)=? AND year(date)=?",
+                    month,
+                    year
+            );
+
+            if(resultSet.next()){
+                cost = resultSet.getDouble(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cost;
+    }
+
+    public static double getCostForYear(String year){
+        double cost=0;
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT SUM(totalBuyingPrice) FROM `order` WHERE year(date)=?",
+                    year
+            );
+
+            if(resultSet.next()){
+                cost = resultSet.getDouble(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cost;
+    }
+
+
+
+static{
+    monthNumber.put("JANUARY",1);
+    monthNumber.put("FEBRUARY",2);
+    monthNumber.put("MARCH",3);
+    monthNumber.put("APRIL",4);
+    monthNumber.put("MAY",5);
+    monthNumber.put("JUNE",6);
+    monthNumber.put("JULY",7);
+    monthNumber.put("AUGUST",8);
+    monthNumber.put("SEPTEMBER",9);
+    monthNumber.put("OCTOBER",10);
+    monthNumber.put("NOVEMBER",11);
+    monthNumber.put("DECEMBER",12);
+}
+
+
 
 
 //    public static void getDayWiseSales(){

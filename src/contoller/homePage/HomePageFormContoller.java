@@ -55,16 +55,20 @@ public class HomePageFormContoller {
     public MenuItem itemLogOut;
     public MenuItem itemExit;
     public MenuItem itemCalc;
+    public MenuItem itemMasterReport;
+    private boolean isOwner;
 
     public void initialize() throws IOException {
         setTime();
         OwnerHamburgerFormcontoller.homePageHmbHamburger = hmbHamburger;
         CashierHamburgerFormContoller.homePageHmbHamburger = hmbHamburger;
-        hamburgerClick();
+        setHmbHamburger();
         OwnerHamburgerFormcontoller.mainTaskOpenPain = mainTaskOpenPain;
         CashierHamburgerFormContoller.mainTaskOpenPain = mainTaskOpenPain;
         SaleFormContoller.mainTaskOpenPain = mainTaskOpenPain;
         ManyItemTopUpWindowFormContoller.homePageAnkerPane = homePageAnkerPane;
+
+        masterRepotVisible();
 
         drawerOptions.setMouseTransparent(true);
         openSale("../view/mainTask/SaleForm.fxml");
@@ -75,23 +79,27 @@ public class HomePageFormContoller {
 
     }
 
+    private void masterRepotVisible() {
+        if (isOwner) itemMasterReport.setVisible(true);
+    }
+
     private void openSale(String location) throws IOException {
         mainTaskOpenPain.getChildren().clear();
         Parent load = FXMLLoader.load(LoginPageFormContoller.class.getResource(location));
         mainTaskOpenPain.getChildren().add(load);
     }
 
-    private void hamburgerClick() {
+    private void setHmbHamburger() {
         try {
             VBox box = null;
             if (UserTableQuery.isOwner(userName)) {
                 //owner hambeger loder
-                SaleFormContoller.isOwner = SeeBillFormContoller.isOwner = true;
+                isOwner = SaleFormContoller.isOwner = SeeBillFormContoller.isOwner = true;
                 box = FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/homePage/OwnerHamburgerForm.fxml"));
                 OwnerHamburgerFormcontoller.drawerOptions = drawerOptions;
             } else {
                 //employee habeger loder
-                SaleFormContoller.isOwner = SeeBillFormContoller.isOwner = false;
+                isOwner = SaleFormContoller.isOwner = SeeBillFormContoller.isOwner = false;
                 box = FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/homePage/CashierHamburgerForm.fxml"));
                 CashierHamburgerFormContoller.drawerOptions = drawerOptions;
             }
@@ -134,15 +142,15 @@ public class HomePageFormContoller {
 
     private Stage shortcutStage;
     public void menuItemShortcutKeyOnAction(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        if(shortcutStage!=null)shortcutStage.close();
-        shortcutStage=stage;
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/ShortCutsForm.fxml"))));
-        stage.setTitle("Shortcut");
-        stage.setResizable(false);
-        stage.getIcons().add(new Image("image/shortcut.png"));
-//        stage.centerOnScreen();
-        stage.show();
+//        Stage stage = new Stage();
+//        if(shortcutStage!=null)shortcutStage.close();
+        shortcutStage=openWindow(shortcutStage,"../view/utillity/ShortCutsForm.fxml","Shortcut","image/shortcut.png");
+//        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/ShortCutsForm.fxml"))));
+//        stage.setTitle("Shortcut");
+//        stage.setResizable(false);
+//        stage.getIcons().add(new Image("image/shortcut.png"));
+////        stage.centerOnScreen();
+//        stage.show();
     }
 
     public void LogoutOnAction(ActionEvent actionEvent) throws IOException {
@@ -172,15 +180,15 @@ public class HomePageFormContoller {
 
     private Stage backUpStage;
     public void itemBackupOnAction(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        if(backUpStage!=null)backUpStage.close();
-        backUpStage=stage;
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/BackupForm.fxml"))));
-        stage.setTitle("Backup Database");
-        stage.setResizable(false);
-        stage.getIcons().add(new Image("image/stageImage/backup.png"));
-        stage.centerOnScreen();
-        stage.show();
+//        Stage stage = new Stage();
+//        if(backUpStage!=null)backUpStage.close();
+        backUpStage=openWindow(backUpStage,"../view/utillity/BackupForm.fxml","Backup Database","image/stageImage/backup.png");
+//        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/BackupForm.fxml"))));
+//        stage.setTitle("Backup Database");
+//        stage.setResizable(false);
+//        stage.getIcons().add(new Image("image/stageImage/backup.png"));
+//        stage.centerOnScreen();
+//        stage.show();
     }
 
     public void itemCalcOnAction(ActionEvent actionEvent) throws IOException {
@@ -190,14 +198,33 @@ public class HomePageFormContoller {
 
     private Stage customerStage;
     public void manageCustomerOnAction(ActionEvent actionEvent) throws IOException {
+//        Stage stage = new Stage();
+//        if(customerStage!=null)customerStage.close();
+        customerStage =openWindow(customerStage,"../view/utillity/ManageCustomerForm.fxml","Manage Customer","image/hamburgerOpenPage/addUser.png");
+//        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/ManageCustomerForm.fxml"))));
+//        stage.setTitle("Manage Customer");
+//        stage.setResizable(false);
+//        stage.getIcons().add(new Image("image/hamburgerOpenPage/addUser.png"));
+//        stage.centerOnScreen();
+//        stage.show();
+    }
+
+    private Stage masterReportStage;
+    public void MasterReportOnAction(ActionEvent actionEvent) throws IOException {
+        masterReportStage = openWindow(masterReportStage,"../view/mainTask/ MasterReport.fxml","Master Report","image/stageImage/masterReport.png");
+    }
+
+    private Stage openWindow(Stage oldStage , String pageUrl ,String title , String imageUrl) throws IOException {
+        if(oldStage!=null)oldStage.close();
         Stage stage = new Stage();
-        if(customerStage!=null)customerStage.close();
-        customerStage = stage;
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/ManageCustomerForm.fxml"))));
-        stage.setTitle("Manage Customer");
+        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource(pageUrl))));
+        stage.setTitle(title);
         stage.setResizable(false);
-        stage.getIcons().add(new Image("image/hamburgerOpenPage/addUser.png"));
+        stage.getIcons().add(new Image(imageUrl));
         stage.centerOnScreen();
         stage.show();
+        return  stage;
     }
+
+
 }

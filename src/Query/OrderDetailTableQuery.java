@@ -63,4 +63,20 @@ public class OrderDetailTableQuery {
         }
     }
 
+//    public static double getCostForMonth(int invoiceNo) {
+//        double cost=0;
+//        try {
+//            ResultSet resultSet = CrudUtil.excecute("SELECT SUM(buyingPrice) FROM orderdetail WHERE invoiceNo=?",
+//                    invoiceNo
+//            );
+//            if(resultSet.next()){
+//                cost =resultSet.getDouble(1);
+//            }
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return cost;
+//    }
 }

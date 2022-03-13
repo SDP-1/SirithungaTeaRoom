@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,7 +67,9 @@ public class SeeBillFormContoller {
     public TextField txtDeleteOrderInvoiceNumber;
     public Button btnPrint;
     public Button btnDeleteReqCancel;
-//    ObservableList<OrdersTM> list;
+    public CheckBox chbOlderThan3Month;
+    public Label lblCashiername;
+    //    ObservableList<OrdersTM> list;
     private int invoiceNo;
 
     protected static double cm_to_pp(double cm) {
@@ -82,6 +85,11 @@ public class SeeBillFormContoller {
         setTableDeatils();
         txtSearchTableDataLoad();
         tableCelectItemCathandDeatilsFill();
+        setDeleteOptionVisible();
+        setInviceNotoDeleteTextFild();
+    }
+
+    private void setDeleteOptionVisible() {
         if (isOwner) {
             txtDeleteOrderInvoiceNumber.setVisible(true);
             btnOrderDeleteButton.setVisible(true);
@@ -100,6 +108,18 @@ public class SeeBillFormContoller {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setInviceNotoDeleteTextFild() {
+        lblInvoiceNo.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != newValue) {
+            if(lblInvoiceNo.getText().equals("--")){
+                txtDeleteOrderInvoiceNumber.clear();
+            }else{
+                txtDeleteOrderInvoiceNumber.setText(lblInvoiceNo.getText());
+            }
+            }
+        });
     }
 
     private void tableCelectItemCathandDeatilsFill() {
@@ -132,6 +152,7 @@ public class SeeBillFormContoller {
             lblFullCost.setText(String.valueOf(detail.getFullCost()));
             lblBalance.setText(String.valueOf(detail.getBalance()));
             lblDescount.setText(String.valueOf(detail.getDiscount()));
+            lblCashiername.setText(detail.getCashiyer());
 
             btnPrint.setVisible(true);
 
@@ -327,6 +348,8 @@ public class SeeBillFormContoller {
     public void chbAdvanceSearchOnAction(ActionEvent actionEvent) {
         try {
             if (chbAdvanceSearch.isSelected()) {
+                chbOlderThan3Month.setVisible(true);
+
                 if (cmbxSelectCatagary.getSelectionModel().getSelectedIndex() != 5) {
                     cmbxSelectCatagary.getSelectionModel().select(5);
                 }
@@ -335,6 +358,11 @@ public class SeeBillFormContoller {
                 cmbxSelectCatagary.setDisable(true);
 
             } else {
+                txtSearch.setPromptText("Search");
+                chbOlderThan3Month.setSelected(false);
+                tblOrdes.setDisable(false);
+                chbOlderThan3Month.setVisible(false);
+
                 txtSearch.setDisable(true);
                 cmbxSelectCatagary.setDisable(false);
                 txtSearch.clear();
@@ -467,6 +495,7 @@ public class SeeBillFormContoller {
         lblFullCost.setText("--");
         lblBalance.setText("--");
         lblDescount.setText("--");
+        lblCashiername.setText("--");
         tblOrderDeatils.setItems(null);
         btnSetPaid.setVisible(false);
         btnPrint.setVisible(false);
@@ -597,5 +626,51 @@ public class SeeBillFormContoller {
     private void setOptionButtonsDefault() {
         btnDeleteReqCancel.setVisible(false);
         btnOrderDeleteButton.setDisable(true);
+    }
+
+    public void chbOlderThan3MonthOnAction(ActionEvent actionEvent) {
+        if(chbOlderThan3Month.isSelected()){
+            txtSearch.clear();
+            txtSearch.setPromptText("Enter the invoice no and press enter Key");
+            tblOrdes.setDisable(true);
+
+            txtSearch.setOnKeyTyped(event ->{
+                if(chbOlderThan3Month.isSelected()){
+                if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+                    event.consume();
+                }
+            }
+            });
+
+            txtSearch.setOnKeyPressed(event ->{
+                if(event.getCode().equals(KeyCode.ENTER)){
+                    try {
+                    int invoiceNo = Integer.parseInt(txtSearch.getText());
+                        if(OrderTableQuery.isOrderHave(invoiceNo)) {
+                            fillOrderDetails(invoiceNo);
+                        }else{
+                            ImageView imageView1 = new ImageView("image/Notifications/error.png");
+                            imageView1.setFitWidth(50);
+                            imageView1.setFitHeight(50);
+                            Notifications n1 = Notifications.create()
+                                    .darkStyle()
+                                    .title("ERROR!")
+                                    .text("Invoice No. "+invoiceNo+" is not in the system.")
+                                    .position(Pos.BOTTOM_LEFT)
+                                    .graphic(imageView1);
+                            n1.show();
+                        }
+                    }catch (NumberFormatException e){}
+                }
+            });
+
+
+
+        }else{
+            clear();
+            txtSearch.clear();
+            txtSearch.setPromptText("Search");
+            tblOrdes.setDisable(false);
+        }
     }
 }

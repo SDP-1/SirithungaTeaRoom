@@ -52,6 +52,27 @@ public class ManageCustomerFormContoller {
         deactiveButton();
         lableErrormasageSet();
         clearLables();
+        enterKeyConsume();
+    }
+
+    private void enterKeyConsume() {
+        txtCustomerName.setOnKeyPressed(event->{
+            if(event.getCode().equals(KeyCode.ENTER)){
+                txtContactNo1.requestFocus();
+            }
+        });
+
+        txtContactNo1.setOnKeyPressed(event->{
+            if(event.getCode().equals(KeyCode.ENTER)){
+                txtContactNo2.requestFocus();
+            }
+        });
+
+        txtContactNo2.setOnKeyPressed(event->{
+            if(event.getCode().equals(KeyCode.ENTER)){
+                txtDescription.requestFocus();
+            }
+        });
     }
 
     private void fillTable(){

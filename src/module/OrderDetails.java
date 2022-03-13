@@ -12,6 +12,10 @@ public class OrderDetails {
     private double balance;
     private boolean onLoan;
     private double discount;
+    private double totalBingPrice;
+    private String cashiyer;
+
+
 
     public OrderDetails() {
     }
@@ -24,7 +28,7 @@ public class OrderDetails {
         this.discount = discount;
     }
 
-    public OrderDetails(int invoiceNo, String date, String time, String customerName, boolean retail, int noOfItem, double fullCost, double cash, double balance, boolean onLoan, double discount) {
+    public OrderDetails(int invoiceNo, String date, String time, String customerName, boolean retail, int noOfItem, double fullCost, double cash, double balance, boolean onLoan, double discount,double totalBingPrice, String cashiyer) {
         this.invoiceNo = invoiceNo;
         this.date = date;
         this.time = time;
@@ -36,6 +40,8 @@ public class OrderDetails {
         this.balance = balance;
         this.onLoan = onLoan;
         this.discount = discount;
+        this.totalBingPrice = totalBingPrice;
+        this.cashiyer = cashiyer;
     }
 
     public int getInvoiceNo() {
@@ -65,6 +71,23 @@ public class OrderDetails {
     public String getCustomerName() {
         return customerName;
     }
+
+    public double getTotalBingPrice() {
+        return totalBingPrice;
+    }
+
+    public void setTotalBingPrice(double totalBingPrice) {
+        this.totalBingPrice = totalBingPrice;
+    }
+
+    public String getCashiyer() {
+        return cashiyer;
+    }
+
+    public void setCashiyer(String cashiyer) {
+        this.cashiyer = cashiyer;
+    }
+
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
@@ -132,6 +155,8 @@ public class OrderDetails {
                 ", balance=" + balance +
                 ", onLoan=" + onLoan +
                 ", discount=" + discount +
+                ", totalBingPrice=" + totalBingPrice +
+                ", cashiyer='" + cashiyer + '\'' +
                 '}';
     }
 }

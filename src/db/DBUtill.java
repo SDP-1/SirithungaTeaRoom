@@ -17,8 +17,8 @@ public class DBUtill {
 
             CodeSource codeSource = AutoBackUp.class.getProtectionDomain().getCodeSource();
             File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            String jarDir = jarFile.getParentFile().getPath();
-            String folderPath = jarDir + "\\Mysqldump\\mysqldump.exe";
+            String jarDir = jarFile.getParentFile().getParentFile().getParentFile().getPath();
+            String folderPath = jarDir + "\\utill\\Mysqldump\\mysqldump.exe";
 
             String savePath = location + "\\" + filename + ".sql";
 

@@ -25,6 +25,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Utility">
                             <items>
+                        <MenuItem fx:id="itemMasterReport" mnemonicParsing="false" onAction="#MasterReportOnAction" text="MasterReport" visible="false" />
                                 <MenuItem mnemonicParsing="false" onAction="#itemBackupOnAction" text="BackUp" />
                         <MenuItem mnemonicParsing="false" onAction="#manageCustomerOnAction" text="Manage Customer" />
                         <MenuItem fx:id="itemCalc" mnemonicParsing="false" onAction="#itemCalcOnAction" text="Calculator" />

@@ -55,6 +55,7 @@ public class ShowLastBillDeatailsFormContoller {
     public Button btnSetPaid;
     public Button btnOrderDeleteButton;
     public Button btnPrint;
+    public Label lblCashierName;
 
     protected static double cm_to_pp(double cm) {
         return toPPI(cm * 0.393600787);
@@ -116,6 +117,7 @@ public class ShowLastBillDeatailsFormContoller {
             lblFullCost.setText(String.valueOf(detail.getFullCost()));
             lblBalance.setText(String.valueOf(detail.getBalance()));
             lblDescount.setText(String.valueOf(detail.getDiscount()));
+            lblCashierName.setText(detail.getCashiyer());
 
             if (detail.isOnLoan()) {
                 btnSetPaid.setVisible(true);

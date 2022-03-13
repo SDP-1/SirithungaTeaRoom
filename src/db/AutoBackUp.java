@@ -16,8 +16,8 @@ public class AutoBackUp {
         CodeSource codeSource = AutoBackUp.class.getProtectionDomain().getCodeSource();
         File jarFile = new File(codeSource.getLocation().toURI().getPath());
 
-        String jarDir = jarFile.getParentFile().getPath();
-        String folderPath = jarDir + "\\Backup";
+        String jarDir = jarFile.getParentFile().getParentFile().getParentFile().getPath();
+        String folderPath = jarDir + "\\utill\\Backup";
 
             String fileName = "Auto Backup "+new SimpleDateFormat("yyyy-MM-dd (hh-mm aa)").format(Calendar.getInstance().getTime());
             boolean backupdbtosql = DBUtill.Backupdbtosql(folderPath, fileName);

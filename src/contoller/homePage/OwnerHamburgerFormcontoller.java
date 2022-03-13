@@ -30,7 +30,6 @@ public class OwnerHamburgerFormcontoller {
     public Button btnAddDeleteItem;
     public Button btnAddDeleteUser;
     public Button btnExit;
-    public Button btnMasterReport;
 
     public void initialize() throws IOException {
         darkButton = btnSale;
@@ -61,9 +60,6 @@ public class OwnerHamburgerFormcontoller {
         entedClourchange(btnAddDeleteItem);
     }
 
-    public void masterReportMouseEnted(MouseEvent mouseEvent) { entedClourchange(btnMasterReport);
-    }
-
     public void addBillMouseOut(MouseEvent mouseEvent) {
         outClourchange(btnSale);
     }
@@ -84,15 +80,10 @@ public class OwnerHamburgerFormcontoller {
         outClourchange(btnAddDeleteUser);
     }
 
-    public void masterReportMouseOut(MouseEvent mouseEvent) { outClourchange(btnMasterReport);
-    }
 
     public void entedClourchange(Button btn) {
         btn.setStyle("-fx-background-color: #2C5060");
     }
-
-
-
 
 
     public void outClourchange(Button btn) {
@@ -101,7 +92,7 @@ public class OwnerHamburgerFormcontoller {
 
     }
 
-    private void setDefultDarkButton(){
+    private void setDefultDarkButton() {
         darkButton.setStyle("-fx-background-color:  #2C5060");
     }
 
@@ -158,17 +149,11 @@ public class OwnerHamburgerFormcontoller {
         mainTaskOpenPain.getChildren().add(load);
     }
 
-    public void btnMasterReportOnAction(ActionEvent actionEvent) throws IOException {
-        darkButton = btnMasterReport;
-        loadPage("../view/mainTask/ MasterReport.fxml");
-        close();
-    }
-
     public void exsit(MouseEvent mouseEvent) {
         close();
     }
 
-    private void close(){
+    private void close() {
         drawerOptions.close();
         drawerOptions.setMouseTransparent(true);
         dark();
@@ -181,11 +166,9 @@ public class OwnerHamburgerFormcontoller {
         outClourchange(btnAddDeleteUser);
         outClourchange(btnAddDeleteItem);
         outClourchange(btnseeBill);
-        outClourchange(btnMasterReport);
 
         entedClourchange(darkButton);
     }
-
 
 
 }
