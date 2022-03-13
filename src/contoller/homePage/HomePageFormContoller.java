@@ -214,6 +214,11 @@ public class HomePageFormContoller {
         masterReportStage = openWindow(masterReportStage,"../view/mainTask/ MasterReport.fxml","Master Report","image/stageImage/masterReport.png");
     }
 
+    private  Stage stockAdjusment;
+    public void StockAdjusmentOnAction(ActionEvent actionEvent) throws IOException {
+        stockAdjusment = openWindow(stockAdjusment,"../view/mainTask/StockAdjusment.fxml","Stock Adjusment","image/stageImage/stock.png");
+    }
+
     private Stage openWindow(Stage oldStage , String pageUrl ,String title , String imageUrl) throws IOException {
         if(oldStage!=null)oldStage.close();
         Stage stage = new Stage();
@@ -225,6 +230,7 @@ public class HomePageFormContoller {
         stage.show();
         return  stage;
     }
+
 
 
 }

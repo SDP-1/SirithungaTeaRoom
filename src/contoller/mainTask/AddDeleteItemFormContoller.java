@@ -856,7 +856,7 @@ public class AddDeleteItemFormContoller {
 
             list = ItemTableQuery.getSuppliers();
             AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(txtSupplier, SuggestionProvider.create(list));
-            binding.setVisibleRowCount(20);
+            binding.setVisibleRowCount(8);
 
 
         } catch (SQLException throwables) {
