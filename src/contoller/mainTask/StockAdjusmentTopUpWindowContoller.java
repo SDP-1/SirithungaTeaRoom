@@ -1,28 +1,35 @@
 package contoller.mainTask;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import module.Item;
 import module.ManyItemTopUp;
+import org.controlsfx.control.Notifications;
 import util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class ManyItemTopUpWindowFormContoller {
-
-    public static ResultSet resultSet;
-    public static AnchorPane homePageAnkerPane;
-    public TableColumn clmCode2;
-    public TableColumn clmCode;
+public class StockAdjusmentTopUpWindowContoller {
+    public static AnchorPane ankerpane;
+    public static ArrayList<Item> itemList;
     public TableView tblItem;
+    public TableColumn clmCode;
+    public TableColumn clmCode2;
     public TableColumn clmName;
     public TableColumn clmPrintName;
     public Label lblCode;
@@ -37,7 +44,6 @@ public class ManyItemTopUpWindowFormContoller {
     public Label lblMarkPrice;
 
     public void initialize() throws SQLException {
-        homePageAnkerPane.setDisable(true);
         clmCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         clmCode2.setCellValueFactory(new PropertyValueFactory<>("code2"));
         clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -46,20 +52,44 @@ public class ManyItemTopUpWindowFormContoller {
 
         tableDataLoad();
         lableDataLode();
-        SaleFormContoller.tblItem = AddDeleteItemFormContoller.tblItem = tblItem;
+        StockAdjusmentController.tblItem = tblItem;
+    }
+
+    public void tableKeyPress(KeyEvent keyEvent){
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            Stage stage = (Stage) tblItem.getScene().getWindow();
+            ankerpane.setDisable(false);
+            stage.close();
+        }
+    }
+
+    private void tableDataLoad() throws SQLException {
+        ObservableList<ManyItemTopUp> observableList = FXCollections.observableArrayList();
+
+        for (Item item :itemList) {
+            observableList.add(new ManyItemTopUp(
+                    (int)item.getCode(),
+                    item.getCode2(),
+                    item.getName(),
+                    item.getPrintName()
+            ));
+        }
+
+        tblItem.setItems(observableList);
     }
 
     private void lableDataLode() {
-        tblItem.getSelectionModel().select(0);
-        ManyItemTopUp select = (ManyItemTopUp) tblItem.getSelectionModel().getSelectedItem();
-        lablefill(select.getCode(), select.getCode2());
-
-        tblItem.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != oldValue) {
-                ManyItemTopUp value = (ManyItemTopUp) newValue;
-                lablefill(value.getCode(), value.getCode2());
-            }
-        });
+        try {
+            tblItem.getSelectionModel().select(0);
+            ManyItemTopUp select = (ManyItemTopUp) tblItem.getSelectionModel().getSelectedItem();
+            lablefill(select.getCode(), select.getCode2());
+            tblItem.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != oldValue) {
+                    ManyItemTopUp value = (ManyItemTopUp) newValue;
+                    lablefill(value.getCode(), value.getCode2());
+                }
+            });
+        }catch (NullPointerException e){return;}
     }
 
     private void lablefill(int code1, int code2) {
@@ -81,29 +111,6 @@ public class ManyItemTopUpWindowFormContoller {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-    }
-
-    private void tableDataLoad() throws SQLException {
-        ObservableList<ManyItemTopUp> observableList = FXCollections.observableArrayList();
-
-        while (resultSet.next()) {
-            observableList.add(new ManyItemTopUp(
-                    resultSet.getInt(1),
-                    resultSet.getInt(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4)
-            ));
-        }
-
-        tblItem.setItems(observableList);
-    }
-
-    public void tableKeyPress(KeyEvent keyEvent) throws SQLException, ClassNotFoundException {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            Stage stage = (Stage) tblItem.getScene().getWindow();
-            stage.close();
-            homePageAnkerPane.setDisable(false);
         }
     }
 }

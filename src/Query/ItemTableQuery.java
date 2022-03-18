@@ -131,9 +131,10 @@ public class ItemTableQuery {
 
     public static boolean updateQty(double qty ,int code1 , int code2) throws SQLException, ClassNotFoundException {
         double stock = getStock(code1,code2);
-
+        double newStock =0;
+        if(stock-qty>0) newStock=stock-qty;
         return CrudUtil.excecute("UPDATE item SET stock=? WHERE code=? AND code2=?",
-                stock>0?stock-qty:0,
+                newStock,
                 code1,
                 code2
         );
@@ -171,6 +172,31 @@ public class ItemTableQuery {
             classNotFoundException.printStackTrace();
         }
         return count;
+    }
+
+    public static ArrayList<Item> getItemDeatils(String barcode) throws SQLException, ClassNotFoundException {
+       ArrayList<Item> items = new ArrayList<>();
+            ResultSet resultSet = CrudUtil.excecute("SELECT * FROM item WHERE barCode=?",barcode);
+       while (resultSet.next()){
+           items.add(new Item(
+                   resultSet.getDouble(1),
+                   resultSet.getInt(2),
+                   resultSet.getString(3),
+                   resultSet.getString(4),
+                   resultSet.getString(5),
+                   resultSet.getString(6),
+                   resultSet.getDouble(7),
+                   resultSet.getBoolean(8),
+                   resultSet.getDouble(9),
+                   resultSet.getDouble(10),
+                   resultSet.getDouble(11),
+                   resultSet.getDouble(12),
+                   resultSet.getDouble(13),
+                   resultSet.getDouble(14)
+           ));
+       }
+
+       return items;
     }
 
 }

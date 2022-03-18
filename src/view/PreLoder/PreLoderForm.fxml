@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="164.0" prefWidth="512.0" style="-fx-background-color: #1EA4D5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.PreLoder.PreLoderFormContoller">
+   <children>
+      <JFXProgressBar fx:id="prosesBar" layoutX="18.0" layoutY="107.0" prefHeight="10.0" prefWidth="477.0" />
+      <Label layoutX="116.0" layoutY="19.0" prefHeight="36.0" prefWidth="280.0" text="Sirihunga TeaRoom" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="399.0" layoutY="19.0" prefHeight="58.0" prefWidth="84.0" text="SP" textFill="WHITE">
+         <font>
+            <Font name="Stencil" size="64.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPresentage" alignment="CENTER" layoutX="224.0" layoutY="125.0" prefHeight="21.0" prefWidth="65.0" text="0%" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

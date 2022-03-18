@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="478.0" prefWidth="847.0" style="-fx-background-color: #507280;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.StockAdjusmentTopUpWindowContoller">
+   <children>
+      <TableView fx:id="tblItem" layoutX="14.0" layoutY="14.0" onKeyPressed="#tableKeyPress" prefHeight="215.0" prefWidth="820.0">
+         <columns>
+            <TableColumn fx:id="clmCode" prefWidth="100.0" sortable="false" text="Code" />
+            <TableColumn fx:id="clmCode2" prefWidth="100.0" sortable="false" text="Code2" />
+            <TableColumn fx:id="clmName" prefWidth="310.0" sortable="false" text="Name" />
+            <TableColumn fx:id="clmPrintName" prefWidth="310.0" sortable="false" text="Print Name" />
+         </columns>
+      </TableView>
+      <Pane layoutX="14.0" layoutY="249.0" prefHeight="215.0" prefWidth="820.0" style="-fx-background-color: #1897C8; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="33.0" layoutY="26.0" text="Code -" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="312.0" layoutY="26.0" text="Code 2-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="552.0" layoutY="26.0" text="BarCode-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="73.0" text="Name-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="121.0" text="Print Name-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="165.0" text="R Price -" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="238.0" layoutY="165.0" text="W Price -" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCode" layoutX="103.0" layoutY="26.0" prefHeight="27.0" prefWidth="153.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCode2" layoutX="392.0" layoutY="26.0" prefHeight="27.0" prefWidth="153.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblBarCode" layoutX="645.0" layoutY="26.0" prefHeight="27.0" prefWidth="173.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblName" layoutX="149.0" layoutY="73.0" prefHeight="27.0" prefWidth="402.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPrintName" layoutX="152.0" layoutY="121.0" prefHeight="27.0" prefWidth="402.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRetilPrice" layoutX="116.0" layoutY="165.0" prefHeight="27.0" prefWidth="89.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblWholesalePrice" layoutX="329.0" layoutY="165.0" prefHeight="27.0" prefWidth="89.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="453.0" layoutY="165.0" text="R-Ratio-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblretilRato" layoutX="535.0" layoutY="165.0" prefHeight="27.0" prefWidth="57.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="633.0" layoutY="165.0" text="W-Ratio-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblWholesaleRatio" layoutX="720.0" layoutY="165.0" prefHeight="27.0" prefWidth="57.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="777.0" layoutY="168.0" text="\%" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="592.0" layoutY="168.0" text="\%" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="558.0" layoutY="94.0" text="Mark Price-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMarkPrice" layoutX="671.0" layoutY="87.0" prefHeight="41.0" prefWidth="125.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
