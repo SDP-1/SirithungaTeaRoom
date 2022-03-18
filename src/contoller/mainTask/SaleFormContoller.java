@@ -840,6 +840,8 @@ public class SaleFormContoller {
                     }
 
 
+
+
                     ImageView imageView = new ImageView("image/Notifications/tick.png");
                     imageView.setFitWidth(50);
                     imageView.setFitHeight(50);

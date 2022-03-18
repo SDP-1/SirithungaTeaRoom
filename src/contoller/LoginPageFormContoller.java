@@ -90,7 +90,6 @@ public class LoginPageFormContoller {
                         HomePageFormContoller.userName = txtUserName.getText();
                         BackupFormContoller.userName = txtUserName.getText();
                         load("../view/homePage/HomePageForm.fxml");
-                        loadClasses();
                         close();
                         return;
                     }
@@ -122,65 +121,6 @@ public class LoginPageFormContoller {
             alert.showAndWait();
             alert.close();
             close();
-        }
-    }
-
-    private void loadClasses() {
-        ArrayList<String> classes = new ArrayList<>();
-        classes.add("contoller.homePage.CashierHamburgerFormContoller");
-        classes.add("contoller.homePage.HomePageFormContoller");
-        classes.add("contoller.homePage.OwnerHamburgerFormcontoller");
-        classes.add("contoller.mainTask.AddDeleteItemFormContoller");
-        classes.add("contoller.mainTask.AddUserFormContoller");
-        classes.add("contoller.mainTask.ManyItemTopUpWindowFormContoller");
-        classes.add("contoller.mainTask.MasterReportContoller");
-        classes.add("contoller.mainTask.SaleFormContoller");
-        classes.add("contoller.mainTask.SeeBillFormContoller");
-        classes.add("contoller.mainTask.ShowLastBillDeatailsFormContoller");
-        classes.add("contoller.mainTask.StockManageFormContoller");
-        classes.add("contoller.utillity.BackupFormContoller");
-        classes.add("contoller.utillity.ManageCustomerFormContoller");
-        classes.add("contoller.utillity.ShortCutsFormContoller");
-        classes.add("contoller.LoginPageFormContoller");
-        classes.add("db.AutoBackUp");
-        classes.add("db.DBConnection");
-        classes.add("db.DBUtill");
-        classes.add("Invoice.AfterPrintBill");
-        classes.add("Invoice.DebtPaymentConform");
-        classes.add("Invoice.MainBill");
-        classes.add("module.Customer");
-        classes.add("module.CustomerTM");
-        classes.add("module.DeleteReq");
-        classes.add("module.Item");
-        classes.add("module.ManyItemTopUp");
-        classes.add("module.OrderDeatalsTM");
-        classes.add("module.OrderDetails");
-        classes.add("module.OrdersTM");
-        classes.add("module.SaleFormLabelDataOrder");
-        classes.add("module.SaleTableTM");
-        classes.add("module.StockItem");
-        classes.add("module.StockSelectItem");
-        classes.add("module.User");
-        classes.add("module.UsertableTM");
-        classes.add("Query.CustomerTableQuery");
-        classes.add("Query.DeleteReqBillTableQuery");
-        classes.add("Query.ItemTableQuery");
-        classes.add("Query.OrderDetailTableQuery");
-        classes.add("Query.OrderTableQuery");
-        classes.add("Query.PathTableQuery");
-        classes.add("Query.UserTableQuery");
-        classes.add("util.CrudUtil");
-
-        try {
-            ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
-            for (String s : classes) {
-                System.out.println(s);
-                Class.forName(s);
-                systemClassLoader.loadClass(s);
-            }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 

@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="497.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.StockAdjusmentController">
+<AnchorPane fx:id="ankerPane" prefHeight="543.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.StockAdjusmentController">
    <children>
-      <Pane layoutX="36.0" layoutY="132.0" prefHeight="349.0" prefWidth="256.0">
+      <Pane layoutX="34.0" layoutY="194.0" prefHeight="349.0" prefWidth="256.0">
          <children>
             <Label layoutX="21.0" layoutY="14.0" prefHeight="27.0" prefWidth="180.0" text="name                     - ">
                <font>
@@ -41,7 +40,7 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="53.0" layoutY="23.0" prefHeight="27.0" prefWidth="180.0" text="Qty                          -  ">
+      <Label layoutX="53.0" layoutY="23.0" prefHeight="27.0" prefWidth="180.0" text="Qty                         -  ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -61,17 +60,17 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNewQty" layoutX="557.0" layoutY="17.0" prefHeight="39.0" prefWidth="126.0">
+      <TextField fx:id="txtNewQty" layoutX="557.0" layoutY="17.0" onKeyTyped="#txtQtyKeyType" prefHeight="39.0" prefWidth="126.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtBarcode" layoutX="250.0" layoutY="76.0" prefHeight="39.0" prefWidth="318.0">
+      <TextField fx:id="txtBarcode" layoutX="250.0" layoutY="76.0" onKeyTyped="#txtBarcodeKeyType" prefHeight="39.0" prefWidth="318.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <JFXButton fx:id="btnSave" layoutX="620.0" layoutY="446.0" onAction="#btnSaveOnAction" prefHeight="39.0" prefWidth="126.0" style="-fx-background-color: #297BD7; -fx-background-radius: 20;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="btnSave" layoutX="600.0" layoutY="494.0" onAction="#btnSaveOnAction" prefHeight="39.0" prefWidth="146.0" style="-fx-background-color: #297BD7; -fx-background-radius: 20;" text="Update Qty" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -83,27 +82,47 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="lblName" layoutX="250.0" layoutY="148.0" prefHeight="27.0" prefWidth="439.0">
+      <Label fx:id="lblName" layoutX="244.0" layoutY="210.0" prefHeight="27.0" prefWidth="439.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblPrintname" layoutX="250.0" layoutY="214.0" prefHeight="27.0" prefWidth="439.0">
+      <Label fx:id="lblPrintname" layoutX="244.0" layoutY="276.0" prefHeight="27.0" prefWidth="439.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblBuyingPrice" layoutX="250.0" layoutY="286.0" prefHeight="27.0" prefWidth="180.0">
+      <Label fx:id="lblBuyingPrice" layoutX="244.0" layoutY="348.0" prefHeight="27.0" prefWidth="180.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblretailPrice" layoutX="250.0" layoutY="365.0" prefHeight="27.0" prefWidth="180.0">
+      <Label fx:id="lblretailPrice" layoutX="244.0" layoutY="427.0" prefHeight="27.0" prefWidth="180.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblWholesalePrice" layoutX="250.0" layoutY="438.0" prefHeight="27.0" prefWidth="180.0">
+      <Label fx:id="lblWholesalePrice" layoutX="244.0" layoutY="500.0" prefHeight="27.0" prefWidth="180.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="144.0" prefHeight="27.0" prefWidth="180.0" text="Code 1                   - ">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="450.0" layoutY="144.0" prefHeight="27.0" prefWidth="180.0" text="Code 2                  - ">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCode1" layoutX="250.0" layoutY="144.0" prefHeight="27.0" prefWidth="126.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCode2" layoutX="620.0" layoutY="144.0" prefHeight="27.0" prefWidth="126.0">
          <font>
             <Font size="18.0" />
          </font>

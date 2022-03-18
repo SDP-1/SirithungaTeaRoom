@@ -31,16 +31,19 @@
                               <KeyCodeCombination alt="DOWN" code="X" control="UP" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="itemMasterReport" mnemonicParsing="false" onAction="#MasterReportOnAction" text="MasterReport" visible="false">
-                           <accelerator>
-                              <KeyCodeCombination alt="DOWN" code="M" control="UP" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
+                        <MenuItem fx:id="itemMasterReport" mnemonicParsing="false" onAction="#MasterReportOnAction" text="Master Report" visible="false" />
                     </items>
                   </Menu>
                         <Menu mnemonicParsing="false" text="Utility">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#itemBackupOnAction" text="BackUp" />
-                        <MenuItem mnemonicParsing="false" onAction="#manageCustomerOnAction" text="Manage Customer" />
+                                <MenuItem mnemonicParsing="false" onAction="#itemBackupOnAction" text="BackUp">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="B" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#manageCustomerOnAction" text="Manage Customer">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="U" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
                         <MenuItem fx:id="itemCalc" mnemonicParsing="false" onAction="#itemCalcOnAction" text="Calculator" />
                             </items>
                         </Menu>

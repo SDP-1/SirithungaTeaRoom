@@ -1,3 +1,4 @@
+import contoller.PreLoder.PreLoderFormContoller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,9 +15,10 @@ public class LoginPageInitiyalizer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/LoginPageForm.fxml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/PreLoder/PreLoderForm.fxml"))));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.centerOnScreen();
+        PreLoderFormContoller.preloderStage = primaryStage;
         primaryStage.show();
     }
 }

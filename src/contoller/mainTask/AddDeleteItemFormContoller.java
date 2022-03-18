@@ -60,6 +60,9 @@ public class AddDeleteItemFormContoller {
     public JFXButton btnSave;
     public Label lblRatioPrice;
     public Label lblWholesalePrice;
+    public TextField txtPlusQty;
+    public Label lblPlusQty;
+    private double oldStock;
 
     //-------------------------Save------And---------Update-----------------------------
 
@@ -133,6 +136,17 @@ public class AddDeleteItemFormContoller {
 
         supplierSuggestions();
 
+        qtyUpdate();
+    }
+
+    private void qtyUpdate() {
+        txtPlusQty.setOnKeyReleased(event ->{
+            if (txtPlusQty.getText().isEmpty() || Double.parseDouble(txtPlusQty.getText()) == 0) {
+                txtStock.setText(String.valueOf(oldStock));
+            } else {
+                txtStock.setText(String.valueOf(oldStock + Double.parseDouble(txtPlusQty.getText())));
+            }
+        });
     }
 
     private void requestFocusOrDieTrying(Node node) {
@@ -439,7 +453,6 @@ public class AddDeleteItemFormContoller {
         txtWholesalePrice.clear();
         txtWholesalePriceRaito.clear();
 
-        //chcbAdvanceSearch.setSelected(false);
         chcbRetailPriceRatioEnable.setSelected(false);
         chcbWholesalePriceRatioEnable.setSelected(false);
         cmbxCode2.getSelectionModel().select(0);
@@ -451,11 +464,16 @@ public class AddDeleteItemFormContoller {
         btnAutoGeanarate.setDisable(false);
         btnDelete.setDisable(true);
 
-        chcbAdvanceSearch.setSelected(false);
+        lblPlusQty.setVisible(false);
+        txtPlusQty.clear();
+        txtPlusQty.setVisible(false);
+
+//        chcbAdvanceSearch.setSelected(false);
         try {
-            stringAutoCompletionBinding.dispose();
-        } catch (NullPointerException e) {
+            if (!chcbAdvanceSearch.isSelected()){
+                stringAutoCompletionBinding.dispose();
         }
+        } catch (NullPointerException e) {}
 
         txtRetailPrice.setDisable(false);
         txtWholesalePrice.setDisable(false);
@@ -526,12 +544,17 @@ public class AddDeleteItemFormContoller {
             btnDelete.setDisable(false);
             txtPriceOfBuying.requestFocus();
             btnSave.setText("Update");
+
+            lblPlusQty.setVisible(true);
+            txtPlusQty.setVisible(true);
         } else if (count == 0) {
             txtItemCode.requestFocus();
         }
     }
 
     //--------------------Fill------------------------
+    private boolean isDecimal;
+
     private void fill(ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
             txtItemCode.setText(resultSet.getString(1));
@@ -556,6 +579,9 @@ public class AddDeleteItemFormContoller {
             txtRetailRatio.setDisable(resultSet.getInt(11) <= 0);
             txtRetailPrice.setDisable(!txtRetailRatio.isDisable());
             txtWholesalePrice.setDisable(!txtWholesalePriceRaito.isDisable());
+
+            isDecimal = resultSet.getBoolean(8);
+            oldStock = resultSet.getDouble(7);
         }
     }
 
@@ -574,6 +600,9 @@ public class AddDeleteItemFormContoller {
                     btnDelete.setDisable(false);
                     btnSave.setText("Update");
                     txtPriceOfBuying.requestFocus();
+
+                    lblPlusQty.setVisible(true);
+                    txtPlusQty.setVisible(true);
                 } else if (count > 1) {
                     load(resultSet);
                 } else {
@@ -863,6 +892,30 @@ public class AddDeleteItemFormContoller {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void txtPlusQtyKeyType(KeyEvent event) {
+        if (isDecimal) {
+            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '.' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+                event.consume();
+            }
+            if (event.getCharacter().charAt(0) == '.') {
+                boolean have = false;
+                for (int i = 0; i < txtPlusQty.getText().length(); i++) {
+                    if (txtPlusQty.getText().charAt(i) == '.') {
+                        have = true;
+                        break;
+                    }
+                }
+                if (have) {
+                    event.consume();
+                }
+            }
+        }else{
+            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+                event.consume();
+            }
         }
     }
 }
