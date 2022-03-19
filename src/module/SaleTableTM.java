@@ -2,7 +2,7 @@ package module;
 
 public class SaleTableTM {
 
-    private int no;
+    private Integer no;
     private int itemCode;
     private String description;
     private double qty;

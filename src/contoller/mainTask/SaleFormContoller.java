@@ -30,10 +30,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import module.ManyItemTopUp;
-import module.OrderDetails;
-import module.SaleFormLabelDataOrder;
-import module.SaleTableTM;
+import module.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -49,10 +50,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 
 
 public class SaleFormContoller {
@@ -827,20 +825,55 @@ public class SaleFormContoller {
                 if (isDeatilsSave) {
                     connection.commit();
 
-                    double bHeight = Double.valueOf(list.size());
-//                    JOptionPane.showMessageDialog(rootPane, bHeight);
+//                    double bHeight = Double.valueOf(list.size());
+////                    JOptionPane.showMessageDialog(rootPane, bHeight);
+//
+//                    PrinterJob pj = PrinterJob.getPrinterJob();
+//                    pj.setPrintable(new MainBill(orderDetails, list), getPageFormat(pj, bHeight));
+//                    try {
+//                        pj.print();
+//
+//                    } catch (PrinterException ex) {
+//                        ex.printStackTrace();
+//                    }
 
-                    PrinterJob pj = PrinterJob.getPrinterJob();
-                    pj.setPrintable(new MainBill(orderDetails, list), getPageFormat(pj, bHeight));
-                    try {
-                        pj.print();
+                    //-------------Start of print Bill--------------------------------------
 
-                    } catch (PrinterException ex) {
-                        ex.printStackTrace();
+                    LinkedHashMap map = new LinkedHashMap<>();
+                    map.put("invoceNo",orderDetails.getInvoiceNo());
+                    map.put("date",orderDetails.getDate());
+                    map.put("time",orderDetails.getTime());
+                    map.put("tiinvoceNome",lblInvoiceNumber.getText());
+                    map.put("Cashiyer",orderDetails.getCashiyer());
+
+                    map.put("QTY",orderDetails.getNoOfItem());
+                    map.put("PaidStatment",orderDetails.isOnLoan()?"LOAN" : "paid");
+                    map.put("TotalAmount",df.format(orderDetails.getFullCost()));
+                    map.put("Discount",df.format(orderDetails.getDiscount()));
+                    map.put("Cash",df.format(orderDetails.getCash()));
+                    map.put("Balance",df.format(orderDetails.getBalance()));
+
+                    ArrayList<BillStructure> detils = new ArrayList<>();
+                    for (SaleTableTM tm : list){
+                        detils.add(new BillStructure(
+                                tm.getNo(),
+                                tm.getDescription(),
+                                df.format(tm.getQty()),
+                                tm.getPrice() < tm.getMarkPrice()? "*"+df.format(tm.getPrice()) : df.format(tm.getPrice()),
+                                df.format(tm.getNextAmount())
+                        ));
                     }
 
+                    try {
+                        JasperReport compileReport = (JasperReport) JRLoader.loadObject(LoginPageFormContoller.class.getResource("../Invoice/mainBillWithDescount.jasper"));
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, map, new JRBeanCollectionDataSource(detils));
+//                        JasperViewer.viewReport(jasperPrint,false);
+                        JasperPrintManager.printReport(jasperPrint,false);
+                    } catch (JRException e) {
+                        e.printStackTrace();
+                    }
 
-
+                    //-------------------end of print bill--------------------------------
 
                     ImageView imageView = new ImageView("image/Notifications/tick.png");
                     imageView.setFitWidth(50);
