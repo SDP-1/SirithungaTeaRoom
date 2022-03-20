@@ -63,6 +63,29 @@ public class OrderDetailTableQuery {
         }
     }
 
+
+    public static  ObservableList<SaleTableTM> getOrderDetilsForPrint(int invoiceNo) throws SQLException, ClassNotFoundException {
+        ObservableList<SaleTableTM> list = FXCollections.observableArrayList();
+        ResultSet resultSet = CrudUtil.excecute("SELECT * FROM orderdetail WHERE invoiceNo=?;", invoiceNo);
+        int i = 1;
+        while (resultSet.next()) {
+            list.add(new SaleTableTM(
+                   i++,
+                   resultSet.getInt(2),
+                    resultSet.getString(4),
+                    resultSet.getDouble(5),
+                    resultSet.getDouble(6),
+                    resultSet.getDouble(7),
+                    resultSet.getDouble(8),
+                    resultSet.getInt(3),
+                    false,
+                    resultSet.getDouble(9)
+            ));
+        }
+        return list;
+    }
+
+
 //    public static double getCostForMonth(int invoiceNo) {
 //        double cost=0;
 //        try {

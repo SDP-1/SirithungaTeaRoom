@@ -30,19 +30,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import module.*;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
+import module.ManyItemTopUp;
+import module.OrderDetails;
+import module.SaleFormLabelDataOrder;
+import module.SaleTableTM;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.awt.print.PageFormat;
-import java.awt.print.Paper;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -50,7 +45,10 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Optional;
 
 
 public class SaleFormContoller {
@@ -85,13 +83,11 @@ public class SaleFormContoller {
     public Label lblNowBill;
     public TextField txtCustomerName;
     public Label upLableWhosale2;
-    public Label UpLableWholesale;
     public Label upLableretail1;
     public Label upLableWholesale;
     public Label uplableRetil2;
     public JFXButton btnChangPrice;
     public TextField txtCash;
-    public AnchorPane saleRAnkeyPane;
     public Label txtBalance;
     public Label lblLastBill1;
     public Label lblLastBill2;
@@ -110,17 +106,6 @@ public class SaleFormContoller {
     private int lable3;
     private int lable4;
     private int lable5;
-
-//    protected static double cm_to_pp(double cm) {
-//        return toPPI(cm * 0.393600787);
-//    }
-    protected static double cm_to_pp(double cm) {
-        return toPPI(cm *  0.393600787);
-    }
-
-    protected static double toPPI(double inch) {
-        return inch * 73d;
-    }
 
     public void initialize() {
         lblCashierName.setText(cashierName);
@@ -499,7 +484,7 @@ public class SaleFormContoller {
     private void advanceClear() {
         try {
             chbShowItemList.setSelected(false);
-             if(stringAutoCompletionBinding!=null)stringAutoCompletionBinding.dispose();
+            if (stringAutoCompletionBinding != null) stringAutoCompletionBinding.dispose();
 
             lblInvoiceNumber.setText(String.valueOf(OrderTableQuery.getNewInvoiceNo()));
             primaryClear();
@@ -526,16 +511,6 @@ public class SaleFormContoller {
         Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "New order?", ButtonType.YES, ButtonType.NO).showAndWait();
         if (buttonType.get().equals(ButtonType.YES)) {
             advanceClear();
-//            ImageView imageView1 = new ImageView("image/Notifications/tick.png");
-//            imageView1.setFitWidth(50);
-//            imageView1.setFitHeight(50);
-//            Notifications n1 = Notifications.create()
-//                    .darkStyle()
-//                    .title("SUCCESS")
-//                    .text("Clear...")
-//                    .position(Pos.BOTTOM_RIGHT)
-//                    .graphic(imageView1);
-//            n1.show();
         }
     }
 
@@ -825,55 +800,7 @@ public class SaleFormContoller {
                 if (isDeatilsSave) {
                     connection.commit();
 
-//                    double bHeight = Double.valueOf(list.size());
-////                    JOptionPane.showMessageDialog(rootPane, bHeight);
-//
-//                    PrinterJob pj = PrinterJob.getPrinterJob();
-//                    pj.setPrintable(new MainBill(orderDetails, list), getPageFormat(pj, bHeight));
-//                    try {
-//                        pj.print();
-//
-//                    } catch (PrinterException ex) {
-//                        ex.printStackTrace();
-//                    }
-
-                    //-------------Start of print Bill--------------------------------------
-
-                    LinkedHashMap map = new LinkedHashMap<>();
-                    map.put("invoceNo",orderDetails.getInvoiceNo());
-                    map.put("date",orderDetails.getDate());
-                    map.put("time",orderDetails.getTime());
-                    map.put("tiinvoceNome",lblInvoiceNumber.getText());
-                    map.put("Cashiyer",orderDetails.getCashiyer());
-
-                    map.put("QTY",orderDetails.getNoOfItem());
-                    map.put("PaidStatment",orderDetails.isOnLoan()?"LOAN" : "paid");
-                    map.put("TotalAmount",df.format(orderDetails.getFullCost()));
-                    map.put("Discount",df.format(orderDetails.getDiscount()));
-                    map.put("Cash",df.format(orderDetails.getCash()));
-                    map.put("Balance",df.format(orderDetails.getBalance()));
-
-                    ArrayList<BillStructure> detils = new ArrayList<>();
-                    for (SaleTableTM tm : list){
-                        detils.add(new BillStructure(
-                                tm.getNo(),
-                                tm.getDescription(),
-                                df.format(tm.getQty()),
-                                tm.getPrice() < tm.getMarkPrice()? "*"+df.format(tm.getPrice()) : df.format(tm.getPrice()),
-                                df.format(tm.getNextAmount())
-                        ));
-                    }
-
-                    try {
-                        JasperReport compileReport = (JasperReport) JRLoader.loadObject(LoginPageFormContoller.class.getResource("../Invoice/mainBillWithDescount.jasper"));
-                        JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport, map, new JRBeanCollectionDataSource(detils));
-//                        JasperViewer.viewReport(jasperPrint,false);
-                        JasperPrintManager.printReport(jasperPrint,false);
-                    } catch (JRException e) {
-                        e.printStackTrace();
-                    }
-
-                    //-------------------end of print bill--------------------------------
+                    new MainBill().print(orderDetails, list);          //---------------------------------------------------Print bill-----------------------------------------
 
                     ImageView imageView = new ImageView("image/Notifications/tick.png");
                     imageView.setFitWidth(50);
@@ -919,40 +846,20 @@ public class SaleFormContoller {
     }
 
 
-
     //-------------------------------------------------------------------END------------------------------------------------------------------------------
     private boolean getSaleType() {
         String saletype = lblSaleType.getText();
-        return saletype.charAt(saletype.length()-1)=='R';
+        return saletype.charAt(saletype.length() - 1) == 'R';
     }
 
-private double getTotalBuyingPrice(){
-        double totalBingPrice=0;
+    private double getTotalBuyingPrice() {
+        double totalBingPrice = 0;
 
-        for(SaleTableTM x:list){
+        for (SaleTableTM x : list) {
             totalBingPrice += x.getBuyingPrice() * x.getQty();
         }
 
         return totalBingPrice;
-}
-
-    public PageFormat getPageFormat(PrinterJob pj, double bHeight) {
-
-        PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();
-
-        double bodyHeight = bHeight;
-        double headerHeight = 5.0;
-        double footerHeight = 5.0;
-        double width = cm_to_pp(8);
-        double height = cm_to_pp(headerHeight + bodyHeight + footerHeight);
-        paper.setSize(width, height);
-        paper.setImageableArea(0, 10, width, height - cm_to_pp(1));
-
-        pf.setOrientation(PageFormat.PORTRAIT);
-        pf.setPaper(paper);
-
-        return pf;
     }
 
     public void cashOnkeypress(KeyEvent keyEvent) throws SQLException {
@@ -976,11 +883,10 @@ private double getTotalBuyingPrice(){
 
     private double discount() {
         double discount = 0;
-        double totalMarksPrices=0;
-        double totalSaleprice=0;
+        double totalMarksPrices = 0;
+        double totalSaleprice = 0;
         for (SaleTableTM tm : list) {
-//            discount += (tm.getMarkPrice() - tm.getPrice()) * tm.getQty();
-            totalMarksPrices += tm.getMarkPrice()*tm.getQty();
+            totalMarksPrices += tm.getMarkPrice() * tm.getQty();
             totalSaleprice += tm.getNextAmount();
         }
         discount = totalMarksPrices - totalSaleprice;
@@ -1030,28 +936,6 @@ private double getTotalBuyingPrice(){
 
     public void chbSaleTypeChangEnShuwerOnAction(ActionEvent actionEvent) {
         btnChangeSaleType.setDisable(!chbSaleTypeChangEnShuwer.isSelected());
-    }
-
-    public void menuPrintOnAction(ActionEvent actionEvent) {
-        try {
-            if (Double.parseDouble(txtCash.getText()) >= 0) {
-                setOrder();
-            }
-        } catch (NumberFormatException | SQLException e) {
-            ImageView imageView1 = new ImageView("image/Notifications/error.png");
-            imageView1.setFitWidth(50);
-            imageView1.setFitHeight(50);
-            Notifications n1 = Notifications.create()
-                    .darkStyle()
-                    .title("ERROR!")
-                    .position(Pos.BOTTOM_LEFT)
-                    .text("Cash empty.")
-                    .graphic(imageView1);
-            n1.show();
-        }
-    }
-
-    public void menuSaveCopyAndPrint(ActionEvent actionEvent) {
     }
 
     private void deleteDitect() {

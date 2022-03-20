@@ -1,7 +1,7 @@
 package contoller.mainTask;
 
-import Invoice.AfterPrintBill;
-import Invoice.DebtPaymentConform;
+import Invoice.DebetBill;
+import Invoice.MainBill;
 import Query.DeleteReqBillTableQuery;
 import Query.OrderDetailTableQuery;
 import Query.OrderTableQuery;
@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,15 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import module.OrderDeatalsTM;
-import module.OrderDetails;
-import module.OrdersTM;
+import module.*;
 import org.controlsfx.control.Notifications;
 
-import java.awt.print.PageFormat;
-import java.awt.print.Paper;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -69,16 +62,8 @@ public class SeeBillFormContoller {
     public Button btnDeleteReqCancel;
     public CheckBox chbOlderThan3Month;
     public Label lblCashiername;
-    //    ObservableList<OrdersTM> list;
     private int invoiceNo;
 
-    protected static double cm_to_pp(double cm) {
-        return toPPI(cm * 0.393600787);
-    }
-
-    protected static double toPPI(double inch) {
-        return inch * 72d;
-    }
 
     public void initialize() {
         setComboboxData();
@@ -442,43 +427,16 @@ public class SeeBillFormContoller {
         Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Print Bill?", ButtonType.YES, ButtonType.NO).showAndWait();
         if (buttonType.get().equals(ButtonType.YES)) {
             try {
-                ObservableList<OrderDeatalsTM> orderDeatils = OrderDetailTableQuery.getOrderDeatils(invoiceNo);
                 OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
 
-                double bHeight = Double.valueOf(orderDeatils.size());
-
-                PrinterJob pj = PrinterJob.getPrinterJob();
-                pj.setPrintable(new AfterPrintBill(orderDetails, orderDeatils), getPageFormat(pj, bHeight));
-
-                pj.print();
+                new MainBill().print(orderDetails,OrderDetailTableQuery.getOrderDetilsForPrint(invoiceNo));          //---------------------------------------------------Print bill-----------------------------------------
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            } catch (PrinterException e) {
-                e.printStackTrace();
             }
         }
-    }
-
-    public PageFormat getPageFormat(PrinterJob pj, double bHeight) {
-
-        PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();
-
-        double bodyHeight = bHeight;
-        double headerHeight = 5.0;
-        double footerHeight = 5.0;
-        double width = cm_to_pp(8);
-        double height = cm_to_pp(headerHeight + bodyHeight + footerHeight);
-        paper.setSize(width, height);
-        paper.setImageableArea(0, 10, width, height - cm_to_pp(1));
-
-        pf.setOrientation(PageFormat.PORTRAIT);
-        pf.setPaper(paper);
-
-        return pf;
     }
 
     //---------------------------------END--------------------------------------------
@@ -505,17 +463,9 @@ public class SeeBillFormContoller {
         Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Paid Rs: " + -Double.parseDouble(lblBalance.getText()) + " ?\nPrint Confirmation Report?", ButtonType.YES, ButtonType.NO).showAndWait();
         if (buttonType.get().equals(ButtonType.YES)) {
             try {
-//            ---------------------------------
-                ObservableList<OrderDeatalsTM> orderDeatils = OrderDetailTableQuery.getOrderDeatils(invoiceNo);
+
                 OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
-
-                double bHeight = Double.valueOf(orderDeatils.size());
-
-                PrinterJob pj = PrinterJob.getPrinterJob();
-                pj.setPrintable(new DebtPaymentConform(orderDetails, orderDeatils), getPageFormat(pj, bHeight));
-
-                pj.print();
-//                ------------------------------------------
+                new DebetBill().print(orderDetails);            //---------------------------------------------------Print bill-----------------------------------------
 
                 OrderTableQuery.setLoanPaid(Integer.parseInt(lblInvoiceNo.getText()));
                 fillOrderDetails(Integer.parseInt(lblInvoiceNo.getText()));
@@ -557,8 +507,6 @@ public class SeeBillFormContoller {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (PrinterException e) {
                 e.printStackTrace();
             }
         }

@@ -227,14 +227,6 @@
                            </image>
                         </ImageView>
                      </graphic>
-                     <contextMenu>
-                        <ContextMenu>
-                          <items>
-                              <MenuItem mnemonicParsing="false" onAction="#menuPrintOnAction" text="Print" />
-                              <MenuItem mnemonicParsing="false" onAction="#menuSaveCopyAndPrint" text="Save copy and print" />
-                          </items>
-                        </ContextMenu>
-                     </contextMenu>
                   </JFXButton>
                   <Label fx:id="lblNowBill" alignment="TOP_LEFT" layoutX="25.0" layoutY="7.0" prefHeight="87.0" prefWidth="426.0" style="-fx-background-color: #37C9EE;">
                      <font>

@@ -86,9 +86,8 @@ public class PreLoderFormContoller {
         classes.add("db.AutoBackUp");
         classes.add("db.DBConnection");
         classes.add("db.DBUtill");
-        classes.add("Invoice.AfterPrintBill");
-        classes.add("Invoice.DebtPaymentConform");
         classes.add("Invoice.MainBill");
+        classes.add("Invoice.DebetBill");
         classes.add("module.Customer");
         classes.add("module.CustomerTM");
         classes.add("module.DeleteReq");

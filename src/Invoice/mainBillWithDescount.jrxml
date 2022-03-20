@@ -271,7 +271,7 @@
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Total amount]]></text>
+				<text><![CDATA[Net amount]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="107" y="16" width="51" height="20" uuid="4bc95a01-e273-43b1-b725-85fb63124f4a"/>

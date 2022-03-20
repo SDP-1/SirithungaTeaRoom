@@ -1,5 +1,6 @@
 package contoller.mainTask;
 
+import Invoice.StockManageBill;
 import Query.ItemTableQuery;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotResult;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -86,18 +88,22 @@ public class StockManageFormContoller {
         refresh();
     }
 
+    private void errorMessage(String text){
+        ImageView imageView1 = new ImageView("image/Notifications/error.png");
+        imageView1.setFitWidth(50);
+        imageView1.setFitHeight(50);
+        Notifications n1 = Notifications.create()
+                .darkStyle()
+                .title("ERROR!")
+                .text(text)
+                .position(Pos.BOTTOM_LEFT)
+                .graphic(imageView1);
+        n1.show();
+    }
+
     private void refresh() {
         if (selectItems.size() >= 200) {
-            ImageView imageView1 = new ImageView("image/Notifications/error.png");
-            imageView1.setFitWidth(50);
-            imageView1.setFitHeight(50);
-            Notifications n1 = Notifications.create()
-                    .darkStyle()
-                    .title("ERROR!")
-                    .text("200 limit are full.")
-                    .position(Pos.BOTTOM_LEFT)
-                    .graphic(imageView1);
-            n1.show();
+            errorMessage("200 limit are full.");
             return;
         }
 
@@ -210,5 +216,13 @@ public class StockManageFormContoller {
 
     public void paneKeyPressOnAction(KeyEvent keyEvent) {
         txtSearch.requestFocus();
+    }
+
+    public void btnPrintOnAction(ActionEvent event) {
+        if(selectItems.size()<=0){
+            errorMessage("No selected items to print.");
+        }else{
+            new StockManageBill().print(tblSelctItems.getItems());
+        }
     }
 }

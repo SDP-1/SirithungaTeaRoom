@@ -1,5 +1,6 @@
 package contoller;
 
+import Invoice.StockManageBill;
 import Query.UserTableQuery;
 import contoller.homePage.HomePageFormContoller;
 import contoller.mainTask.SaleFormContoller;
@@ -86,9 +87,7 @@ public class LoginPageFormContoller {
                 String password = UserTableQuery.getPassword(txtUserName.getText());
                 if (password != null) {
                     if (password.equals(pwdPassword.getText())) {
-                        SaleFormContoller.cashierName = txtUserName.getText();
-                        HomePageFormContoller.userName = txtUserName.getText();
-                        BackupFormContoller.userName = txtUserName.getText();
+                        StockManageBill.username = BackupFormContoller.userName = HomePageFormContoller.userName =SaleFormContoller.cashierName = txtUserName.getText();
                         load("../view/homePage/HomePageForm.fxml");
                         close();
                         return;

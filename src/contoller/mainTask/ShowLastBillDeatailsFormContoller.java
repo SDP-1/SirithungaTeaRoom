@@ -1,7 +1,7 @@
 package contoller.mainTask;
 
-import Invoice.AfterPrintBill;
-import Invoice.DebtPaymentConform;
+import Invoice.DebetBill;
+import Invoice.MainBill;
 import Query.DeleteReqBillTableQuery;
 import Query.OrderDetailTableQuery;
 import Query.OrderTableQuery;
@@ -268,21 +268,13 @@ public class ShowLastBillDeatailsFormContoller {
         Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Print Bill?", ButtonType.YES, ButtonType.NO).showAndWait();
         if (buttonType.get().equals(ButtonType.YES)) {
             try {
-                ObservableList<OrderDeatalsTM> orderDeatils = OrderDetailTableQuery.getOrderDeatils(invoiceNo);
                 OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
 
-                double bHeight = Double.valueOf(orderDeatils.size());
-
-                PrinterJob pj = PrinterJob.getPrinterJob();
-                pj.setPrintable(new AfterPrintBill(orderDetails, orderDeatils), getPageFormat(pj, bHeight));
-
-                pj.print();
+                new MainBill().print(orderDetails,OrderDetailTableQuery.getOrderDetilsForPrint(invoiceNo));          //---------------------------------------------------Print bill-----------------------------------------
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (PrinterException e) {
                 e.printStackTrace();
             }
         }
@@ -313,17 +305,9 @@ public class ShowLastBillDeatailsFormContoller {
         Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Paid Rs: " + -Double.parseDouble(lblBalance.getText()) + " ?\nPrint Confirmation Report?", ButtonType.YES, ButtonType.NO).showAndWait();
         if (buttonType.get().equals(ButtonType.YES)) {
             try {
-//            ---------------------------------
-                ObservableList<OrderDeatalsTM> orderDeatils = OrderDetailTableQuery.getOrderDeatils(invoiceNo);
+
                 OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
-
-                double bHeight = Double.valueOf(orderDeatils.size());
-
-                PrinterJob pj = PrinterJob.getPrinterJob();
-                pj.setPrintable(new DebtPaymentConform(orderDetails, orderDeatils), getPageFormat(pj, bHeight));
-
-                pj.print();
-//                ------------------------------------------
+                new DebetBill().print(orderDetails);                //---------------------------------------------------Print bill-----------------------------------------
 
                 OrderTableQuery.setLoanPaid(Integer.parseInt(lblInvoiceNo.getText()));
                 fillOrderDetails(Integer.parseInt(lblInvoiceNo.getText()));
@@ -344,8 +328,6 @@ public class ShowLastBillDeatailsFormContoller {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (PrinterException e) {
                 e.printStackTrace();
             }
         }
