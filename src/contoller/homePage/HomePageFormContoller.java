@@ -56,6 +56,11 @@ public class HomePageFormContoller {
     public MenuItem itemExit;
     public MenuItem itemCalc;
     public MenuItem itemMasterReport;
+    public MenuItem itemSaleForm;
+    public MenuItem itemSeeBillForm;
+    public MenuItem itemSupplierMaster;
+    public MenuItem itemManageItems;
+    public MenuItem itemManageUsers;
     private boolean isOwner;
 
     public void initialize() throws IOException {
@@ -68,7 +73,7 @@ public class HomePageFormContoller {
         SaleFormContoller.mainTaskOpenPain = mainTaskOpenPain;
         ManyItemTopUpWindowFormContoller.homePageAnkerPane = homePageAnkerPane;
 
-        masterRepotVisible();
+        VisibleOptions();
 
         drawerOptions.setMouseTransparent(true);
         openSale("../view/mainTask/SaleForm.fxml");
@@ -79,8 +84,11 @@ public class HomePageFormContoller {
 
     }
 
-    private void masterRepotVisible() {
-        if (isOwner) itemMasterReport.setVisible(true);
+    private void VisibleOptions() {
+        if (isOwner){
+            itemMasterReport.setVisible(true);
+            itemManageUsers.setVisible(true);
+        }
     }
 
     private void openSale(String location) throws IOException {
@@ -231,6 +239,28 @@ public class HomePageFormContoller {
         return  stage;
     }
 
+    private Stage seeBillForm;
+    public void itemSeeBillFormOnAction(ActionEvent event) throws IOException {
+        seeBillForm = openWindow(seeBillForm,"../view/mainTask/SeeBillForm.fxml","See Bill Form","image/hamburgerOpenPage/seeBill.png");
+    }
 
+    private Stage supplierMasterForm;
+    public void itemSupplierMasterOnAction(ActionEvent event) throws IOException {
+        supplierMasterForm = openWindow(supplierMasterForm,"../view/mainTask/stockManageForm.fxml","Supplier Master Form","image/hamburgerOpenPage/Supplier.png");
+    }
 
+    private Stage manageItemsForm;
+    public void itemManageItemsOnAction(ActionEvent event) throws IOException {
+        manageItemsForm = openWindow(manageItemsForm,"../view/mainTask/AddDeleteItemForm.fxml","Manage Items Form","image/hamburgerOpenPage/addItem.png");
+    }
+
+    private Stage manageUserForm;
+    public void itemManageUsersOnAction(ActionEvent event) throws IOException {
+        manageUserForm = openWindow(manageUserForm,"../view/mainTask/AddUserForm.fxml","Manage User Form","image/hamburgerOpenPage/addUser.png");
+    }
+
+    private Stage SaleForm;
+    public void itemSaleFormContoller(ActionEvent event) throws IOException {
+        SaleForm = openWindow(SaleForm,"../view/mainTask/SaleForm.fxml","Manage User Form","image/hamburgerOpenPage/sale.png");
+    }
 }

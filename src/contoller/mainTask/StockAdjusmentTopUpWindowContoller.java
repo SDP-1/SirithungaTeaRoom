@@ -1,23 +1,17 @@
 package contoller.mainTask;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import module.Item;
 import module.ManyItemTopUp;
-import org.controlsfx.control.Notifications;
 import util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -55,7 +49,7 @@ public class StockAdjusmentTopUpWindowContoller {
         StockAdjusmentController.tblItem = tblItem;
     }
 
-    public void tableKeyPress(KeyEvent keyEvent){
+    public void tableKeyPress(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             Stage stage = (Stage) tblItem.getScene().getWindow();
             ankerpane.setDisable(false);
@@ -66,9 +60,9 @@ public class StockAdjusmentTopUpWindowContoller {
     private void tableDataLoad() throws SQLException {
         ObservableList<ManyItemTopUp> observableList = FXCollections.observableArrayList();
 
-        for (Item item :itemList) {
+        for (Item item : itemList) {
             observableList.add(new ManyItemTopUp(
-                    (int)item.getCode(),
+                    (int) item.getCode(),
                     item.getCode2(),
                     item.getName(),
                     item.getPrintName()
@@ -89,7 +83,9 @@ public class StockAdjusmentTopUpWindowContoller {
                     lablefill(value.getCode(), value.getCode2());
                 }
             });
-        }catch (NullPointerException e){return;}
+        } catch (NullPointerException e) {
+            return;
+        }
     }
 
     private void lablefill(int code1, int code2) {

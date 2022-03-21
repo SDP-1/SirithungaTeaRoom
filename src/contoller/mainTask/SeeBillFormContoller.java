@@ -18,7 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import module.*;
+import module.OrderDetails;
+import module.OrdersTM;
 import org.controlsfx.control.Notifications;
 
 import java.sql.SQLException;
@@ -98,11 +99,11 @@ public class SeeBillFormContoller {
     private void setInviceNotoDeleteTextFild() {
         lblInvoiceNo.textProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != newValue) {
-            if(lblInvoiceNo.getText().equals("--")){
-                txtDeleteOrderInvoiceNumber.clear();
-            }else{
-                txtDeleteOrderInvoiceNumber.setText(lblInvoiceNo.getText());
-            }
+                if (lblInvoiceNo.getText().equals("--")) {
+                    txtDeleteOrderInvoiceNumber.clear();
+                } else {
+                    txtDeleteOrderInvoiceNumber.setText(lblInvoiceNo.getText());
+                }
             }
         });
     }
@@ -298,7 +299,7 @@ public class SeeBillFormContoller {
 
     private void setSearch() {
         //----------tbl search codes----!!!---------------------------
-        ObservableList list=null;
+        ObservableList list = null;
         try {
             list = OrderTableQuery.getLast3MonthsOrders();
         } catch (SQLException throwables) {
@@ -429,7 +430,7 @@ public class SeeBillFormContoller {
             try {
                 OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
 
-                new MainBill().print(orderDetails,OrderDetailTableQuery.getOrderDetilsForPrint(invoiceNo));          //---------------------------------------------------Print bill-----------------------------------------
+                new MainBill().print(orderDetails, OrderDetailTableQuery.getOrderDetilsForPrint(invoiceNo));          //---------------------------------------------------Print bill-----------------------------------------
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -559,7 +560,8 @@ public class SeeBillFormContoller {
             }
             setOptionButtonsDefault();
             txtDeleteOrderInvoiceNumber.clear();
-        }catch (NumberFormatException e){}
+        } catch (NumberFormatException e) {
+        }
     }
 
     public void txtDeleteOrderInvoiceNumberOnAction(ActionEvent actionEvent) {
@@ -577,44 +579,44 @@ public class SeeBillFormContoller {
     }
 
     public void chbOlderThan3MonthOnAction(ActionEvent actionEvent) {
-        if(chbOlderThan3Month.isSelected()){
+        if (chbOlderThan3Month.isSelected()) {
             txtSearch.clear();
             txtSearch.setPromptText("Enter the invoice no and press enter Key");
             tblOrdes.setDisable(true);
 
-            txtSearch.setOnKeyTyped(event ->{
-                if(chbOlderThan3Month.isSelected()){
-                if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.BACK_SPACE))) {
-                    event.consume();
+            txtSearch.setOnKeyTyped(event -> {
+                if (chbOlderThan3Month.isSelected()) {
+                    if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+                        event.consume();
+                    }
                 }
-            }
             });
 
-            txtSearch.setOnKeyPressed(event ->{
-                if(event.getCode().equals(KeyCode.ENTER)){
+            txtSearch.setOnKeyPressed(event -> {
+                if (event.getCode().equals(KeyCode.ENTER)) {
                     try {
-                    int invoiceNo = Integer.parseInt(txtSearch.getText());
-                        if(OrderTableQuery.isOrderHave(invoiceNo)) {
+                        int invoiceNo = Integer.parseInt(txtSearch.getText());
+                        if (OrderTableQuery.isOrderHave(invoiceNo)) {
                             fillOrderDetails(invoiceNo);
-                        }else{
+                        } else {
                             ImageView imageView1 = new ImageView("image/Notifications/error.png");
                             imageView1.setFitWidth(50);
                             imageView1.setFitHeight(50);
                             Notifications n1 = Notifications.create()
                                     .darkStyle()
                                     .title("ERROR!")
-                                    .text("Invoice No. "+invoiceNo+" is not in the system.")
+                                    .text("Invoice No. " + invoiceNo + " is not in the system.")
                                     .position(Pos.BOTTOM_LEFT)
                                     .graphic(imageView1);
                             n1.show();
                         }
-                    }catch (NumberFormatException e){}
+                    } catch (NumberFormatException e) {
+                    }
                 }
             });
 
 
-
-        }else{
+        } else {
             clear();
             txtSearch.clear();
             txtSearch.setPromptText("Search");

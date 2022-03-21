@@ -10,7 +10,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.SnapshotResult;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -25,6 +24,7 @@ import java.util.Optional;
 
 public class StockManageFormContoller {
 
+    private final ArrayList<StockSelectItem> selectItems = new ArrayList<>();
     public TextField txtSearch;
     public TableView tblItems;
     public TableColumn clmCode1;
@@ -42,7 +42,6 @@ public class StockManageFormContoller {
     public TableColumn clmTickT2;
     public Button btnSelectAll;
     private ArrayList<StockItem> stockItems = null;
-    private final ArrayList<StockSelectItem> selectItems = new ArrayList<>();
 
     public void initialize() {
         setTableCloumns();
@@ -88,7 +87,7 @@ public class StockManageFormContoller {
         refresh();
     }
 
-    private void errorMessage(String text){
+    private void errorMessage(String text) {
         ImageView imageView1 = new ImageView("image/Notifications/error.png");
         imageView1.setFitWidth(50);
         imageView1.setFitHeight(50);
@@ -219,9 +218,9 @@ public class StockManageFormContoller {
     }
 
     public void btnPrintOnAction(ActionEvent event) {
-        if(selectItems.size()<=0){
+        if (selectItems.size() <= 0) {
             errorMessage("No selected items to print.");
-        }else{
+        } else {
             new StockManageBill().print(tblSelctItems.getItems());
         }
     }

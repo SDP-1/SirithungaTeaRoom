@@ -18,7 +18,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -52,15 +51,12 @@ import java.util.Optional;
 
 
 public class SaleFormContoller {
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-    private static final ObservableList<SaleTableTM> list = FXCollections.observableArrayList();
     public static String cashierName;
     public static AnchorPane mainTaskOpenPain;
     public static TableView tblItem;
     public static boolean isOwner;
-    private static int qty = 0;
-    private static double totalAmount = 0;
-    private static AutoCompletionBinding stringAutoCompletionBinding;
+    private final DecimalFormat df = new DecimalFormat("0.00");
+    private final ObservableList<SaleTableTM> list = FXCollections.observableArrayList();
     public Label lblInvoiceNumber;
     public Label lblCashierName;
     public TextField txtBarCode;
@@ -100,6 +96,9 @@ public class SaleFormContoller {
     public CheckBox chbSaleTypeChangEnShuwer;
     public Label lblDeleteDetect;
     AutoCompletionBinding<String> bindingCustomer;
+    private int qty = 0;
+    private double totalAmount = 0;
+    private AutoCompletionBinding stringAutoCompletionBinding;
     private SaleTableTM saleTableTMData;
     private int lable1;
     private int lable2;
@@ -448,6 +447,7 @@ public class SaleFormContoller {
     }
 
     private void tableDatafill() {
+        rechackInvoiceNo();
         try {
             saleTableTMData.setQty(Double.parseDouble(txtQty.getText()));
             saleTableTMData.setMarkPrice(Double.parseDouble((df.format(Double.parseDouble(txtMarkPrice.getText())))));
@@ -743,7 +743,18 @@ public class SaleFormContoller {
         }
     }
 
+    private void rechackInvoiceNo() {
+        try {
+            lblInvoiceNumber.setText(String.valueOf(OrderTableQuery.getNewInvoiceNo()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setOrder() throws SQLException {
+        rechackInvoiceNo();
         ImageView imageView1 = new ImageView("image/Notifications/error.png");
         imageView1.setFitWidth(50);
         imageView1.setFitHeight(50);

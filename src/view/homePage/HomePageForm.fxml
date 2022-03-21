@@ -47,6 +47,15 @@
                         <MenuItem fx:id="itemCalc" mnemonicParsing="false" onAction="#itemCalcOnAction" text="Calculator" />
                             </items>
                         </Menu>
+                  <Menu mnemonicParsing="false" text="Forms">
+                    <items>
+                        <MenuItem fx:id="itemSaleForm" mnemonicParsing="false" onAction="#itemSaleFormContoller" text="Sale Form" />
+                        <MenuItem fx:id="itemSeeBillForm" mnemonicParsing="false" onAction="#itemSeeBillFormOnAction" text="See Bill Form" />
+                        <MenuItem fx:id="itemSupplierMaster" mnemonicParsing="false" onAction="#itemSupplierMasterOnAction" text="Supplier Master Form" />
+                        <MenuItem fx:id="itemManageItems" mnemonicParsing="false" onAction="#itemManageItemsOnAction" text="Manage Item Form" />
+                        <MenuItem fx:id="itemManageUsers" mnemonicParsing="false" onAction="#itemManageUsersOnAction" text="Manage User Form" visible="false" />
+                    </items>
+                  </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <MenuItem fx:id="itemShortcut" mnemonicParsing="false" onAction="#menuItemShortcutKeyOnAction" text="shortcut" />

@@ -3,7 +3,6 @@ package contoller.mainTask;
 import Query.UserTableQuery;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
-import db.AutoBackUp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +28,9 @@ import java.util.regex.Pattern;
 
 public class AddUserFormContoller {
 
+    private final Pattern c1 = Pattern.compile("^[a-zA-Z\\s]*$");
+    private final Pattern c2 = Pattern.compile("[0-9]*");
+    private final Pattern c3 = Pattern.compile("[0-9]*[Vv]");
     public RadioButton rdbNo;
     public ToggleGroup owner;
     public RadioButton rdbYes;
@@ -48,9 +50,6 @@ public class AddUserFormContoller {
     public Label lblNicChack;
     public Label lblUserNameChack;
     public Label lblpasswordChack;
-    private final Pattern c1 = Pattern.compile("^[a-zA-Z\\s]*$");
-    private final Pattern c2 = Pattern.compile("[0-9]*");
-    private final Pattern c3 = Pattern.compile("[0-9]*[Vv]");
 
     public void initialize() {
         settableCloumns();
@@ -80,7 +79,7 @@ public class AddUserFormContoller {
 
         txtNic.textProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != newValue) {
-                if (!((c2.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 12)|| (c3.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 10))) {
+                if (!((c2.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 12) || (c3.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 10))) {
                     Image img = new Image("Image/problam.png");
                     ImageView view = new ImageView(img);
                     view.setFitHeight(20);
@@ -330,7 +329,7 @@ public class AddUserFormContoller {
             n1.text("NIC can't empty.");
             n1.show();
             return;
-        } else if (!((c2.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 12)|| (c3.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 10))) {
+        } else if (!((c2.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 12) || (c3.matcher(txtNic.getText()).matches() && noSpaseLength(txtNic) == 10))) {
             n1.text("Invalide NIC.");
             n1.show();
             return;
@@ -369,7 +368,7 @@ public class AddUserFormContoller {
             //-----Hadele root 2 account----------
             //------rootrootroot :- not database it can be restore backup only
             //-----Sehan Devinda  :- with database it can hadele all(include restore backup)
-            if( user.getUserName().equals("rootrootroot") || user.getUserName().equals("Sehan Devinda")){
+            if (user.getUserName().equals("rootrootroot") || user.getUserName().equals("Sehan Devinda")) {
                 n1.text("This username canot use.");
                 n1.show();
                 return;

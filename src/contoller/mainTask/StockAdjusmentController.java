@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -47,7 +46,7 @@ public class StockAdjusmentController {
     private boolean isDecimal;
     private double qty;
 
-    public void initialize(){
+    public void initialize() {
         requestFocusOrDieTrying(txtBarcode);
         txtNewQty.setDisable(true);
         btnSave.setDisable(true);
@@ -59,14 +58,14 @@ public class StockAdjusmentController {
         txtBarcode.getParent().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.getCode() == KeyCode.DELETE){
+                if (event.getCode() == KeyCode.DELETE) {
                     clear();
                 }
             }
         });
     }
 
-    private void successMessage(String text){
+    private void successMessage(String text) {
         ImageView imageView1 = new ImageView("image/Notifications/tick.png");
         imageView1.setFitWidth(50);
         imageView1.setFitHeight(50);
@@ -80,7 +79,7 @@ public class StockAdjusmentController {
     }
 
     private void qtyUpdate() {
-        txtNewQty.setOnKeyReleased(event ->{
+        txtNewQty.setOnKeyReleased(event -> {
             if (txtNewQty.getText().isEmpty() || Double.parseDouble(txtNewQty.getText()) == 0) {
                 lblOldQty.setText(String.valueOf(qty));
                 btnSave.setDisable(true);
@@ -127,9 +126,9 @@ public class StockAdjusmentController {
                             txtNewQty.setDisable(false);
                         } else {
                             boolean load = load(itemDeatils);
-                            if(!load){
+                            if (!load) {
                                 txtNewQty.setDisable(true);
-                            }else{
+                            } else {
                                 requestFocusOrDieTrying(txtNewQty);
                                 txtNewQty.setDisable(false);
                             }
@@ -155,7 +154,7 @@ public class StockAdjusmentController {
         });
     }
 
-    private void errorMessage(String text){
+    private void errorMessage(String text) {
         ImageView imageView1 = new ImageView("image/Notifications/error.png");
         imageView1.setFitWidth(50);
         imageView1.setFitHeight(50);
@@ -172,7 +171,7 @@ public class StockAdjusmentController {
         StockAdjusmentTopUpWindowContoller.ankerpane = ankerPane;
 
         Stage stage = new Stage();
-       StockAdjusmentTopUpWindowContoller.itemList = items;
+        StockAdjusmentTopUpWindowContoller.itemList = items;
         stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/mainTask/StockAdjusmentTopUpWindowForm.fxml"))));
         stage.setTitle("SELECT ITEM");
         stage.initStyle(StageStyle.UNDECORATED);
@@ -202,7 +201,7 @@ public class StockAdjusmentController {
                         resultSet.getDouble(14)
                 ));
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             stage.close();
             errorMessage("This bar code does not exist in the system.");
             return false;
@@ -224,7 +223,7 @@ public class StockAdjusmentController {
             }
 
             try {
-                if(resultSet1.next()) {
+                if (resultSet1.next()) {
                     fill(new Item(
                             resultSet1.getDouble(1),
                             resultSet1.getInt(2),
@@ -267,7 +266,7 @@ public class StockAdjusmentController {
     }
 
     public void txtQtyKeyType(KeyEvent event) {
-        if(isDecimal) {
+        if (isDecimal) {
             if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '.' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
                 event.consume();
             }
@@ -283,7 +282,7 @@ public class StockAdjusmentController {
                     event.consume();
                 }
             }
-        }else{
+        } else {
             if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
                 event.consume();
             }
@@ -298,8 +297,8 @@ public class StockAdjusmentController {
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         try {
-            boolean isSave = ItemTableQuery.updateQty(-(Double.parseDouble(txtNewQty.getText())),Integer.parseInt(lblCode1.getText()),Integer.parseInt(lblCode2.getText()));
-            if(isSave){
+            boolean isSave = ItemTableQuery.updateQty(-(Double.parseDouble(txtNewQty.getText())), Integer.parseInt(lblCode1.getText()), Integer.parseInt(lblCode2.getText()));
+            if (isSave) {
                 successMessage("Qty updated.");
                 clear();
             }
