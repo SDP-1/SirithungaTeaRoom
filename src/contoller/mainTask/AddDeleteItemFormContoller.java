@@ -107,7 +107,7 @@ public class AddDeleteItemFormContoller {
         lablePriceUpdate();
 
         txtBarCode.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (txtBarCode.getText().length() >= 13) {
+            if (txtBarCode.getText().length() >= 13 && !txtItemCode.isDisable()) {
                 try {
                     find();
                 } catch (SQLException throwables) {

@@ -57,13 +57,6 @@ public class ShowLastBillDeatailsFormContoller {
     public Button btnPrint;
     public Label lblCashierName;
 
-    protected static double cm_to_pp(double cm) {
-        return toPPI(cm * 0.393600787);
-    }
-
-    protected static double toPPI(double inch) {
-        return inch * 72d;
-    }
 
     public void initialize() {
 
@@ -268,9 +261,9 @@ public class ShowLastBillDeatailsFormContoller {
         Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Print Bill?", ButtonType.YES, ButtonType.NO).showAndWait();
         if (buttonType.get().equals(ButtonType.YES)) {
             try {
-                OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
+                OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(Integer.parseInt(lblInvoiceNo.getText()));
 
-                new MainBill().print(orderDetails,OrderDetailTableQuery.getOrderDetilsForPrint(invoiceNo));          //---------------------------------------------------Print bill-----------------------------------------
+                new MainBill().print(orderDetails,OrderDetailTableQuery.getOrderDetilsForPrint(Integer.parseInt(lblInvoiceNo.getText())));          //---------------------------------------------------Print bill-----------------------------------------
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -280,25 +273,6 @@ public class ShowLastBillDeatailsFormContoller {
         }
     }
 
-    public PageFormat getPageFormat(PrinterJob pj, double bHeight) {
-
-        PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();
-
-        double bodyHeight = bHeight;
-        double headerHeight = 5.0;
-        double footerHeight = 5.0;
-        double width = cm_to_pp(8);
-        double height = cm_to_pp(headerHeight + bodyHeight + footerHeight);
-        paper.setSize(width, height);
-        paper.setImageableArea(0, 10, width, height - cm_to_pp(1));
-
-        pf.setOrientation(PageFormat.PORTRAIT);
-        pf.setPaper(paper);
-
-        return pf;
-    }
-
     //---------------------------------END--------------------------------------------
 
     public void SetPaindAndPrintConfirmationReportOnAction(ActionEvent actionEvent) {
@@ -306,7 +280,7 @@ public class ShowLastBillDeatailsFormContoller {
         if (buttonType.get().equals(ButtonType.YES)) {
             try {
 
-                OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(invoiceNo);
+                OrderDetails orderDetails = OrderTableQuery.getOrderDeatil(Integer.parseInt(lblInvoiceNo.getText()));
                 new DebetBill().print(orderDetails);                //---------------------------------------------------Print bill-----------------------------------------
 
                 OrderTableQuery.setLoanPaid(Integer.parseInt(lblInvoiceNo.getText()));
