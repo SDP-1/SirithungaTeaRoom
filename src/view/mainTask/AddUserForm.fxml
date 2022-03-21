@@ -23,7 +23,7 @@
    <children>
       <Pane prefHeight="77.0" prefWidth="1928.0" style="-fx-background-color: #297BD7;">
          <children>
-            <Label layoutX="451.0" layoutY="11.0" prefHeight="56.0" prefWidth="538.0" text="Add/Edit /Delete User" textFill="WHITE">
+            <Label layoutX="451.0" layoutY="11.0" prefHeight="56.0" prefWidth="538.0" text="Manage Users" textFill="WHITE">
                <font>
                   <Font name="Eras Bold ITC" size="48.0" />
                </font>

@@ -306,12 +306,6 @@ public class SaleFormContoller {
         });
     }
 
-    private void load(String location) throws IOException {
-        mainTaskOpenPain.getChildren().clear();
-        Parent load = FXMLLoader.load(LoginPageFormContoller.class.getResource(location));
-        mainTaskOpenPain.getChildren().add(load);
-    }
-
     public void txtQtyOnAction(ActionEvent actionEvent) {
         ImageView imageView1 = new ImageView("image/Notifications/error.png");
         imageView1.setFitWidth(50);

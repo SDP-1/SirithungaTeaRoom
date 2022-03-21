@@ -696,7 +696,10 @@ public class AddDeleteItemFormContoller {
         btnAutoGeanarate.setDisable(true);
         txtItemCode.setDisable(true);
         btnDelete.setDisable(false);
+
         btnSave.setText("Update");
+        lblPlusQty.setVisible(true);
+        txtPlusQty.setVisible(true);
 
         Stage stage = new Stage();
         ManyItemTopUpWindowFormContoller.resultSet = resultSet;

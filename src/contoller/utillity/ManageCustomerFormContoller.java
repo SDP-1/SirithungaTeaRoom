@@ -24,6 +24,9 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class ManageCustomerFormContoller {
+    public static TextField saleFormSearchCustomer;
+    public static AutoCompletionBinding<String> bindingCustomer;
+    private static AutoCompletionBinding<String> binding;
     public Label lblCustomerName;
     public TextArea txtDescription;
     public TextField txtCustomerName;
@@ -39,9 +42,7 @@ public class ManageCustomerFormContoller {
     public TableColumn clmNo;
     public TableColumn clmName;
     public TableColumn clmDescription;
-    public static TextField saleFormSearchCustomer;
     int cid;
-    Pattern c1 = Pattern.compile("^[A-z\\s]*$");
     Pattern c5 = Pattern.compile("^0[0-9]{9}$");
 
     public void initialize() {
@@ -56,30 +57,30 @@ public class ManageCustomerFormContoller {
     }
 
     private void enterKeyConsume() {
-        txtCustomerName.setOnKeyPressed(event->{
-            if(event.getCode().equals(KeyCode.ENTER)){
+        txtCustomerName.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
                 txtContactNo1.requestFocus();
             }
         });
 
-        txtContactNo1.setOnKeyPressed(event->{
-            if(event.getCode().equals(KeyCode.ENTER)){
+        txtContactNo1.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
                 txtContactNo2.requestFocus();
             }
         });
 
-        txtContactNo2.setOnKeyPressed(event->{
-            if(event.getCode().equals(KeyCode.ENTER)){
+        txtContactNo2.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
                 txtDescription.requestFocus();
             }
         });
     }
 
-    private void fillTable(){
+    private void fillTable() {
         tblCustomers.setItems(CustomerTableQuery.getCustomersForTable());
     }
 
-    public void setTableCloumns(){
+    public void setTableCloumns() {
         clmNo.setCellValueFactory(new PropertyValueFactory<>("no"));
         clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clmDescription.setCellValueFactory(new PropertyValueFactory<>("desc"));
@@ -96,9 +97,9 @@ public class ManageCustomerFormContoller {
 
     private void lableErrormasageSet() {
 
-            txtContactNo1.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (oldValue != newValue) {
-                    try {
+        txtContactNo1.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != newValue) {
+                try {
                     if (!txtContactNo1.getText().isEmpty()) {
                         if (!(c5.matcher(txtContactNo1.getText()).matches() && noSpaseLength(txtContactNo1) == 10)) {
                             Image img = new Image("image/problam.png");
@@ -115,13 +116,14 @@ public class ManageCustomerFormContoller {
                         }
                     }
                     if (txtContactNo1.getText().isEmpty()) lblContactNo1.setGraphic(null);
-                    }catch (NullPointerException e){}
+                } catch (NullPointerException e) {
                 }
-            });
+            }
+        });
 
-            txtContactNo2.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (oldValue != newValue) {
-                    try{
+        txtContactNo2.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != newValue) {
+                try {
                     if (!(txtContactNo2.getText().isEmpty())) {
                         if (!(c5.matcher(txtContactNo2.getText()).matches() && noSpaseLength(txtContactNo2) == 10)) {
                             Image img = new Image("image/problam.png");
@@ -139,13 +141,14 @@ public class ManageCustomerFormContoller {
                     }
 
                     if (txtContactNo2.getText().isEmpty()) lblContactNo2.setGraphic(null);
-                    }catch (NullPointerException e){}
+                } catch (NullPointerException e) {
                 }
-            });
+            }
+        });
 
-            txtCustomerName.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (oldValue != newValue) {
-                    try {
+        txtCustomerName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != newValue) {
+                try {
                     if (!txtCustomerName.getText().isEmpty()) {
                         if (!(noSpaseLength(txtCustomerName) >= 5)) {
                             Image img = new Image("image/problam.png");
@@ -162,9 +165,10 @@ public class ManageCustomerFormContoller {
                         }
                     }
                     if (txtCustomerName.getText().isEmpty()) lblCustomerName.setGraphic(null);
-                }catch (NullPointerException e){}
+                } catch (NullPointerException e) {
                 }
-            });
+            }
+        });
     }
 
     private void requestFocusOrDieTrying(Node node) {
@@ -175,12 +179,13 @@ public class ManageCustomerFormContoller {
             }
         });
     }
-    private static AutoCompletionBinding<String> binding;
+
     private void setCustomerNames() {
         HashSet<String> list;
         try {
             binding.dispose();
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
         try {
             list = CustomerTableQuery.getCustomerNames();
             binding = TextFields.bindAutoCompletion(txtCustomerName, SuggestionProvider.create(list));
@@ -193,7 +198,6 @@ public class ManageCustomerFormContoller {
             e.printStackTrace();
         }
     }
-
 
     public void btnFindOnAction(ActionEvent actionEvent) {
         try {
@@ -252,7 +256,6 @@ public class ManageCustomerFormContoller {
         }
     }
 
-
     private void save() throws SQLException, ClassNotFoundException {
         ImageView imageView1 = new ImageView("image/Notifications/error.png");
         imageView1.setFitWidth(50);
@@ -262,39 +265,40 @@ public class ManageCustomerFormContoller {
                 .title("ERROR!")
                 .position(Pos.BOTTOM_LEFT)
                 .graphic(imageView1);
-try {
+        try {
 
-    if(txtCustomerName.getText().isEmpty()){
-        n1.text("Customer name can't empty.");
-        n1.show();
-        return;
-    }else if(txtDescription.getText().isEmpty()){
-        n1.text("Customer Description can't empty.");
-        n1.show();
-        return;
-    }else if (!(noSpaseLength(txtCustomerName) >= 5)) {
-        n1.text("Customer name must be at least 5 characters long.");
-        n1.show();
-        return;
-    }else if(!(txtContactNo1.getText().isEmpty())){
-        if (!(c5.matcher(txtContactNo1.getText()).matches() && noSpaseLength(txtContactNo1) == 10)) {
-            n1.text("Contact no1 Error!");
-            n1.show();
-            return;
-        }
-    } else if(!(txtContactNo2.getText().isEmpty())) {
-        if (!(c5.matcher(txtContactNo2.getText()).matches() && noSpaseLength(txtContactNo2) == 10)) {
-            n1.text("Contact no2 Error!");
-            n1.show();
-            return;
-        }
-    }else if (CustomerTableQuery.customerNameIsExsits(txtCustomerName.getText())) {
-            n1.text("This Customer name already exists.");
-            n1.show();
-            return;
-        }
+            if (txtCustomerName.getText().isEmpty()) {
+                n1.text("Customer name can't empty.");
+                n1.show();
+                return;
+            } else if (txtDescription.getText().isEmpty()) {
+                n1.text("Customer Description can't empty.");
+                n1.show();
+                return;
+            } else if (!(noSpaseLength(txtCustomerName) >= 5)) {
+                n1.text("Customer name must be at least 5 characters long.");
+                n1.show();
+                return;
+            } else if (!(txtContactNo1.getText().isEmpty())) {
+                if (!(c5.matcher(txtContactNo1.getText()).matches() && noSpaseLength(txtContactNo1) == 10)) {
+                    n1.text("Contact no1 Error!");
+                    n1.show();
+                    return;
+                }
+            } else if (!(txtContactNo2.getText().isEmpty())) {
+                if (!(c5.matcher(txtContactNo2.getText()).matches() && noSpaseLength(txtContactNo2) == 10)) {
+                    n1.text("Contact no2 Error!");
+                    n1.show();
+                    return;
+                }
+            } else if (CustomerTableQuery.customerNameIsExsits(txtCustomerName.getText())) {
+                n1.text("This Customer name already exists.");
+                n1.show();
+                return;
+            }
 
-}catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
 
         CustomerTableQuery.addCustomer(new Customer(
                 txtCustomerName.getText(),
@@ -328,37 +332,38 @@ try {
                 .title("ERROR!")
                 .position(Pos.BOTTOM_LEFT)
                 .graphic(imageView1);
-try {
-    if(txtCustomerName.getText().isEmpty()){
-        n1.text("Customer name can't empty.");
-        n1.show();
-        return;
-    }else if(txtDescription.getText().isEmpty()){
-        n1.text("Customer Description can't empty.");
-        n1.show();
-        return;
-    }else if (!(noSpaseLength(txtCustomerName) >= 5)) {
-        n1.text("Customer name must be at least 5 characters long.");
-        n1.show();
-        return;
-    }else if(!(txtContactNo1.getText().isEmpty())){
-        if (!(c5.matcher(txtContactNo1.getText()).matches() && noSpaseLength(txtContactNo1) == 10)) {
-            n1.text("Contact no1 Error!");
-            n1.show();
-            return;
+        try {
+            if (txtCustomerName.getText().isEmpty()) {
+                n1.text("Customer name can't empty.");
+                n1.show();
+                return;
+            } else if (txtDescription.getText().isEmpty()) {
+                n1.text("Customer Description can't empty.");
+                n1.show();
+                return;
+            } else if (!(noSpaseLength(txtCustomerName) >= 5)) {
+                n1.text("Customer name must be at least 5 characters long.");
+                n1.show();
+                return;
+            } else if (!(txtContactNo1.getText().isEmpty())) {
+                if (!(c5.matcher(txtContactNo1.getText()).matches() && noSpaseLength(txtContactNo1) == 10)) {
+                    n1.text("Contact no1 Error!");
+                    n1.show();
+                    return;
+                }
+            } else if (!(txtContactNo2.getText().isEmpty())) {
+                if (!(c5.matcher(txtContactNo2.getText()).matches() && noSpaseLength(txtContactNo2) == 10)) {
+                    n1.text("Contact no2 Error!");
+                    n1.show();
+                    return;
+                }
+            } else if (CustomerTableQuery.skipThisCustomerCustomerNameIsExsits(txtCustomerName.getText(), cid)) {
+                n1.text("This Customer name already exists.");
+                n1.show();
+                return;
+            }
+        } catch (NullPointerException e) {
         }
-    } else if(!(txtContactNo2.getText().isEmpty())) {
-        if (!(c5.matcher(txtContactNo2.getText()).matches() && noSpaseLength(txtContactNo2) == 10)) {
-            n1.text("Contact no2 Error!");
-            n1.show();
-            return;
-        }
-    } else if (CustomerTableQuery.skipThisCustomerCustomerNameIsExsits(txtCustomerName.getText(), cid)) {
-        n1.text("This Customer name already exists.");
-        n1.show();
-        return;
-    }
-}catch (NullPointerException e){}
 
         CustomerTableQuery.updateCustomer(new Customer(
                 cid,
@@ -418,9 +423,10 @@ try {
         try {
             clear();
             CustomerTM selectedItem = (CustomerTM) tblCustomers.getSelectionModel().getSelectedItem();
-            cid=selectedItem.getCid();
+            cid = selectedItem.getCid();
             fillDeatils(selectedItem.getCid());
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
     }
 
     private void fillDeatils(int cid) {
@@ -442,13 +448,14 @@ try {
             activeButtons();
         }
     }
-    public static AutoCompletionBinding<String> bindingCustomer;
-    private void setSaleFormCustomerSugesens(){
+
+    private void setSaleFormCustomerSugesens() {
         saleFormSearchCustomer.clear();
         HashSet<String> list;
         try {
             bindingCustomer.dispose();
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
 
         try {
 

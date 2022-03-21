@@ -19,17 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 
 public class BackupFormContoller {
-    Pattern c1 = Pattern.compile("^[a-zA-Z\\s]*$");
-    Pattern c2 = Pattern.compile("[0-9]*");
-    Pattern c3 = Pattern.compile("[0-9]*[Vv]");
-    Pattern c4 = Pattern.compile("[a-zA-Z][0-9]*");
-    Pattern c5 = Pattern.compile("0[0-9]*");
-
-
     public static String userName;
     private final File lastOpened = null;
     public TextField txtLocation;
@@ -69,7 +61,7 @@ public class BackupFormContoller {
     private void enableOrNotRestore() {
         if (userName.equals("Sehan Devinda")) {
             checkboxRestore.setVisible(true);
-        }else if( userName.equals("rootrootroot")){
+        } else if (userName.equals("rootrootroot")) {
             checkboxRestore.setVisible(true);
             checkboxRestore.setSelected(true);
             checkboxRestore.setDisable(true);
