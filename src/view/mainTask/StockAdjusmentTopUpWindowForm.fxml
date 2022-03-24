@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="478.0" prefWidth="847.0" style="-fx-background-color: #507280;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contoller.mainTask.StockAdjusmentTopUpWindowContoller">
    <children>
       <TableView fx:id="tblItem" layoutX="14.0" layoutY="14.0" onKeyPressed="#tableKeyPress" prefHeight="215.0" prefWidth="820.0">
@@ -125,9 +124,9 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblMarkPrice" layoutX="671.0" layoutY="87.0" prefHeight="41.0" prefWidth="125.0">
+            <Label fx:id="lblMarkPrice" layoutX="661.0" layoutY="87.0" prefHeight="41.0" prefWidth="153.0">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
          </children>

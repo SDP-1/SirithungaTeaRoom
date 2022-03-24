@@ -2,16 +2,15 @@ package Query;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import module.*;
+import org.omg.CosNaming.IstringHelper;
 import util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Locale;
+import java.util.*;
 
 public class OrderTableQuery {
     private static LinkedHashMap<String , Integer> monthNumber = new LinkedHashMap();
@@ -508,6 +507,152 @@ public class OrderTableQuery {
         return cost;
     }
 
+    public static ObservableList<SalesQtyTM> saleFordate(String year , String month , String date){
+
+        ObservableList<SalesQtyTM> list = FXCollections.observableArrayList();
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT invoiceNo FROM `order` WHERE DATE(date)=?",
+                    year+"-"+monthNumber.get(month.toUpperCase())+"-"+date
+            );
+            while (resultSet.next()){
+                ResultSet resultSet1 = CrudUtil.excecute("SELECT  code1,code2,description,qty FROM orderdetail WHERE invoiceNo=?",
+                        resultSet.getInt(1));
+                while (resultSet1.next()){
+
+                    int code1 = resultSet1.getInt(1);
+                    int code2 = resultSet1.getInt(2);
+                    String name = resultSet1.getString(3);
+                    double qty = resultSet1.getDouble(4);
+
+                    SalesQtyTM item = new SalesQtyTM(code1, code2, name, qty);
+
+                    boolean itemHave = false;
+                    for(SalesQtyTM tm  :list){
+                        if(code1 == tm.getCode1() && code2 == tm.getCode2()){
+                            tm.setQty(tm.getQty()+qty);
+                            itemHave = true;
+                           break;
+                        }
+                    }
+
+                    if(!itemHave){
+                        itemHave = false;
+                        list.add(item);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        list = sortDesc(list);
+        return list;
+    }
+
+    public static ObservableList<SalesQtyTM> saleForMonth(String year, String month) {
+        ObservableList<SalesQtyTM> list = FXCollections.observableArrayList();
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT invoiceNo FROM `order` WHERE MONTHNAME(date)=? AND year(date)=?",
+                    month,
+                    year
+            );
+            while (resultSet.next()){
+                ResultSet resultSet1 = CrudUtil.excecute("SELECT  code1,code2,description,qty FROM orderdetail WHERE invoiceNo=?",
+                        resultSet.getInt(1));
+                while (resultSet1.next()){
+
+                    int code1 = resultSet1.getInt(1);
+                    int code2 = resultSet1.getInt(2);
+                    String name = resultSet1.getString(3);
+                    double qty = resultSet1.getDouble(4);
+
+                    SalesQtyTM item = new SalesQtyTM(code1, code2, name, qty);
+
+                    boolean itemHave = false;
+                    for(SalesQtyTM tm  :list){
+                        if(code1 == tm.getCode1() && code2 == tm.getCode2()){
+                            tm.setQty(tm.getQty()+qty);
+                            itemHave = true;
+                            break;
+                        }
+                    }
+
+                    if(!itemHave){
+                        itemHave = false;
+                        list.add(item);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        list = sortDesc(list);
+        return list;
+    }
+
+    public static ObservableList<SalesQtyTM> saleForYear(String year) {
+        ObservableList<SalesQtyTM> list = FXCollections.observableArrayList();
+        try {
+            ResultSet resultSet = CrudUtil.excecute("SELECT invoiceNo FROM `order` WHERE year(date)=?",
+                    year
+            );
+            while (resultSet.next()){
+                ResultSet resultSet1 = CrudUtil.excecute("SELECT  code1,code2,description,qty FROM orderdetail WHERE invoiceNo=?",
+                        resultSet.getInt(1));
+                while (resultSet1.next()){
+
+                    int code1 = resultSet1.getInt(1);
+                    int code2 = resultSet1.getInt(2);
+                    String name = resultSet1.getString(3);
+                    double qty = resultSet1.getDouble(4);
+
+                    SalesQtyTM item = new SalesQtyTM(code1, code2, name, qty);
+
+                    boolean itemHave = false;
+                    for(SalesQtyTM tm  :list){
+                        if(code1 == tm.getCode1() && code2 == tm.getCode2()){
+                            tm.setQty(tm.getQty()+qty);
+                            itemHave = true;
+                            break;
+                        }
+                    }
+
+                    if(!itemHave){
+                        itemHave = false;
+                        list.add(item);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        list = sortDesc(list);
+        return list;
+    }
+
+    private static ObservableList<SalesQtyTM> sortDesc(ObservableList<SalesQtyTM> list){
+        for (int i = list.size() - 1; i > 0 ; i--) {
+
+            for (int j = 0; j < i; j++) {
+                SalesQtyTM firstValue = list.get(j);
+                SalesQtyTM secondValue = list.get(j + 1);
+
+                if (firstValue.getQty() < secondValue.getQty()) {
+                    list.set(j, secondValue);
+                    list.set(j + 1, firstValue);
+                }
+            }
+        }
+        return list;
+    }
 
 
 static{

@@ -17,10 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -55,12 +52,14 @@ public class HomePageFormContoller {
     public MenuItem itemLogOut;
     public MenuItem itemExit;
     public MenuItem itemCalc;
-    public MenuItem itemMasterReport;
     public MenuItem itemSaleForm;
     public MenuItem itemSeeBillForm;
     public MenuItem itemSupplierMaster;
     public MenuItem itemManageItems;
     public MenuItem itemManageUsers;
+    public MenuItem itemRevenues;
+    public MenuItem itemSale;
+    public Menu itemMasterReport;
     private boolean isOwner;
 
     public void initialize() throws IOException {
@@ -218,7 +217,7 @@ public class HomePageFormContoller {
     }
 
     private Stage masterReportStage;
-    public void MasterReportOnAction(ActionEvent actionEvent) throws IOException {
+    public void itemRevenuesOnAction(ActionEvent actionEvent) throws IOException {
         masterReportStage = openWindow(masterReportStage,"../view/mainTask/ MasterReport.fxml","Master Report","image/stageImage/masterReport.png");
     }
 
@@ -262,5 +261,10 @@ public class HomePageFormContoller {
     private Stage SaleForm;
     public void itemSaleFormContoller(ActionEvent event) throws IOException {
         SaleForm = openWindow(SaleForm,"../view/mainTask/SaleForm.fxml","Manage User Form","image/hamburgerOpenPage/sale.png");
+    }
+
+    private Stage saleQtyForm;
+    public void itemSaleOnAction(ActionEvent event) throws IOException {
+        SaleForm = openWindow(saleQtyForm,"../view/mainTask/MasterReportForSaleForm.fxml","Sales Master Form","image/stageImage/sales.png");
     }
 }

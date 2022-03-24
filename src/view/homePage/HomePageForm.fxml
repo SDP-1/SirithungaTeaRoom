@@ -26,12 +26,17 @@
                         </Menu>
                   <Menu mnemonicParsing="false" text="Master File">
                     <items>
+                        <Menu fx:id="itemMasterReport" mnemonicParsing="false" text="Master Report">
+                          <items>
+                            <MenuItem fx:id="itemRevenues" mnemonicParsing="false" onAction="#itemRevenuesOnAction" text="Revenues" />
+                              <MenuItem fx:id="itemSale" mnemonicParsing="false" onAction="#itemSaleOnAction" text="Sales" />
+                          </items>
+                        </Menu>
                       <MenuItem mnemonicParsing="false" onAction="#StockAdjusmentOnAction" text="Stock Adjusment">
                            <accelerator>
                               <KeyCodeCombination alt="DOWN" code="X" control="UP" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="itemMasterReport" mnemonicParsing="false" onAction="#MasterReportOnAction" text="Master Report" visible="false" />
                     </items>
                   </Menu>
                         <Menu mnemonicParsing="false" text="Utility">

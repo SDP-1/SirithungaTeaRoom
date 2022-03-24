@@ -124,9 +124,9 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblMarkPrice" layoutX="671.0" layoutY="87.0" prefHeight="41.0" prefWidth="125.0">
+            <Label fx:id="lblMarkPrice" layoutX="663.0" layoutY="87.0" prefHeight="41.0" prefWidth="153.0">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
          </children>

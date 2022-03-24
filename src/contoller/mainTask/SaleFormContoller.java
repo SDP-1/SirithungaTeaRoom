@@ -820,7 +820,11 @@ public class SaleFormContoller {
 
                     lastBillLableDataSet();
 
-                    Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "New Order?", ButtonType.YES, ButtonType.NO).showAndWait();
+//                    Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Balance Rs. "+txtBalance+"\nNew Order?", ButtonType.YES, ButtonType.NO).showAndWait();
+                    Alert alet = new Alert(Alert.AlertType.CONFIRMATION, "New Order?", ButtonType.YES, ButtonType.NO);
+                    alet.setHeaderText("Balance Rs. "+txtBalance.getText());
+                    Optional<ButtonType> buttonType= alet.showAndWait();
+
                     if (buttonType.get().equals(ButtonType.YES)) {
                         advanceClear();
                     }
