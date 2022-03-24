@@ -140,11 +140,22 @@ public class AddDeleteItemFormContoller {
     }
 
     private void qtyUpdate() {
-        txtPlusQty.setOnKeyReleased(event ->{
-            if (txtPlusQty.getText().isEmpty() || Double.parseDouble(txtPlusQty.getText()) == 0) {
-                txtStock.setText(String.valueOf(oldStock));
-            } else {
-                txtStock.setText(String.valueOf(oldStock + Double.parseDouble(txtPlusQty.getText())));
+        txtPlusQty.setOnKeyReleased(event -> {
+            try {
+                if (txtPlusQty.getText().isEmpty() || Double.parseDouble(txtPlusQty.getText()) == 0) {
+                    txtStock.setText(String.valueOf(oldStock));
+                    btnSave.setDisable(false);
+                } else {
+                    txtStock.setText(String.valueOf(oldStock + Double.parseDouble(txtPlusQty.getText())));
+                    btnSave.setDisable(false);
+                }
+                if(Double.parseDouble(txtStock.getText())<0){
+                    btnSave.setDisable(true);
+                }
+
+            }catch (NumberFormatException e){
+                btnSave.setDisable(true);
+                return;
             }
         });
     }
@@ -901,7 +912,7 @@ public class AddDeleteItemFormContoller {
 
     public void txtPlusQtyKeyType(KeyEvent event) {
         if (isDecimal) {
-            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '.' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '-' || event.getCharacter().charAt(0) == '.' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
                 event.consume();
             }
             if (event.getCharacter().charAt(0) == '.') {
@@ -917,7 +928,7 @@ public class AddDeleteItemFormContoller {
                 }
             }
         }else{
-            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '-' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
                 event.consume();
             }
         }

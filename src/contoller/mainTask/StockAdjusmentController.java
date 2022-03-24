@@ -65,6 +65,7 @@ public class StockAdjusmentController {
         });
     }
 
+
     private void successMessage(String text) {
         ImageView imageView1 = new ImageView("image/Notifications/tick.png");
         imageView1.setFitWidth(50);
@@ -80,12 +81,21 @@ public class StockAdjusmentController {
 
     private void qtyUpdate() {
         txtNewQty.setOnKeyReleased(event -> {
+            try {
             if (txtNewQty.getText().isEmpty() || Double.parseDouble(txtNewQty.getText()) == 0) {
                 lblOldQty.setText(String.valueOf(qty));
                 btnSave.setDisable(true);
             } else {
                 lblOldQty.setText(String.valueOf(qty + Double.parseDouble(txtNewQty.getText())));
                 btnSave.setDisable(false);
+            }
+                if(Double.parseDouble(lblOldQty.getText())<0){
+                    btnSave.setDisable(true);
+                }
+                
+            }catch (NumberFormatException e){
+                btnSave.setDisable(true);
+                return;
             }
         });
     }
@@ -267,7 +277,7 @@ public class StockAdjusmentController {
 
     public void txtQtyKeyType(KeyEvent event) {
         if (isDecimal) {
-            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '.' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '-' || event.getCharacter().charAt(0) == '.' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
                 event.consume();
             }
             if (event.getCharacter().charAt(0) == '.') {
@@ -283,7 +293,7 @@ public class StockAdjusmentController {
                 }
             }
         } else {
-            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
+            if (!(Character.isDigit(event.getCharacter().charAt(0)) || event.getCharacter().charAt(0) == '-' || event.getCode().equals(KeyCode.ENTER) || event.getCode().equals(KeyCode.BACK_SPACE))) {
                 event.consume();
             }
         }

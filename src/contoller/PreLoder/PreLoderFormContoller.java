@@ -18,6 +18,7 @@ public class PreLoderFormContoller {
     public static Stage preloderStage;
 
     public void initialize(){
+        prosesBar.setStyle("-fx-progress-color: blue");
         proces();
     }
 
@@ -88,6 +89,8 @@ public class PreLoderFormContoller {
         classes.add("db.DBUtill");
         classes.add("Invoice.MainBill");
         classes.add("Invoice.DebetBill");
+        classes.add("Invoice.StockManageBill");
+        classes.add("module.BillStructure");
         classes.add("module.Customer");
         classes.add("module.CustomerTM");
         classes.add("module.DeleteReq");
@@ -98,6 +101,7 @@ public class PreLoderFormContoller {
         classes.add("module.OrdersTM");
         classes.add("module.SaleFormLabelDataOrder");
         classes.add("module.SaleTableTM");
+        classes.add("module.StockItemPrint");
         classes.add("module.StockItem");
         classes.add("module.StockSelectItem");
         classes.add("module.User");
