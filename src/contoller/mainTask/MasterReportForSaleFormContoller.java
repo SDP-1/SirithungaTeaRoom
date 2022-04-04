@@ -104,7 +104,6 @@ public class MasterReportForSaleFormContoller {
     }
 
 
-
     private void dataLoad() {
         String year = cmbxYear.getSelectionModel().getSelectedItem().toString();
         String month = null;
