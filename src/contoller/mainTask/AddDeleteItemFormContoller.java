@@ -356,6 +356,10 @@ public class AddDeleteItemFormContoller {
         clear();
 //        AutoBackUp.getAutoBackup();
         ItemTableQuery.setUpper();
+        if(chcbAdvanceSearch.isSelected()){
+            stringAutoCompletionBinding.dispose();
+                OnAdvanceSearch();
+        }
     }
 
     //-------------------update------------------------------
@@ -445,8 +449,12 @@ public class AddDeleteItemFormContoller {
                 clear();
                 ItemTableQuery.setUpper();
 //                AutoBackUp.getAutoBackup();
-            } else {
             }
+        }
+
+        if(chcbAdvanceSearch.isSelected()){
+            stringAutoCompletionBinding.dispose();
+            OnAdvanceSearch();
         }
     }
 
@@ -750,11 +758,21 @@ public class AddDeleteItemFormContoller {
 
     }
 
-    public void isOnAdvanceSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void isOnAdvanceSearchOnAction(ActionEvent actionEvent) {
+        OnAdvanceSearch();
+    }
+
+    private void OnAdvanceSearch() {
         HashSet<String> list = new HashSet<>();
         if (chcbAdvanceSearch.isSelected()) {
             list.clear();
-            list = ItemTableQuery.getCodesAndNamesInItems();
+            try {
+                list = ItemTableQuery.getCodesAndNamesInItems();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             stringAutoCompletionBinding = TextFields.bindAutoCompletion(txtItemCode, SuggestionProvider.create(list));
 
             stringAutoCompletionBinding.setVisibleRowCount(20);
