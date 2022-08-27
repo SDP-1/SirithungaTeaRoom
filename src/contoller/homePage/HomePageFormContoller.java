@@ -75,7 +75,7 @@ public class HomePageFormContoller {
         VisibleOptions();
 
         drawerOptions.setMouseTransparent(true);
-        openSale("../view/mainTask/SaleForm.fxml");
+        openSale("/view/mainTask/SaleForm.fxml");
 
         itemShortcut.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.ALT_DOWN));
         itemLogOut.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.ALT_DOWN));
@@ -102,12 +102,12 @@ public class HomePageFormContoller {
             if (UserTableQuery.isOwner(userName)) {
                 //owner hambeger loder
                 isOwner = SaleFormContoller.isOwner = SeeBillFormContoller.isOwner = true;
-                box = FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/homePage/OwnerHamburgerForm.fxml"));
+                box = FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/homePage/OwnerHamburgerForm.fxml"));
                 OwnerHamburgerFormcontoller.drawerOptions = drawerOptions;
             } else {
                 //employee habeger loder
                 isOwner = SaleFormContoller.isOwner = SeeBillFormContoller.isOwner = false;
-                box = FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/homePage/CashierHamburgerForm.fxml"));
+                box = FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/homePage/CashierHamburgerForm.fxml"));
                 CashierHamburgerFormContoller.drawerOptions = drawerOptions;
             }
             drawerOptions.setSidePane(box);
@@ -151,7 +151,7 @@ public class HomePageFormContoller {
     public void menuItemShortcutKeyOnAction(ActionEvent actionEvent) throws IOException {
 //        Stage stage = new Stage();
 //        if(shortcutStage!=null)shortcutStage.close();
-        shortcutStage=openWindow(shortcutStage,"../view/utillity/ShortCutsForm.fxml","Shortcut","image/shortcut.png");
+        shortcutStage=openWindow(shortcutStage,"/view/utillity/ShortCutsForm.fxml","Shortcut","image/shortcut.png");
 //        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/ShortCutsForm.fxml"))));
 //        stage.setTitle("Shortcut");
 //        stage.setResizable(false);
@@ -171,7 +171,7 @@ public class HomePageFormContoller {
 
     private void loadLoginPage() throws IOException {
         Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/LoginPageForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/LoginPageForm.fxml"))));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.centerOnScreen();
         stage.show();
@@ -189,7 +189,7 @@ public class HomePageFormContoller {
     public void itemBackupOnAction(ActionEvent actionEvent) throws IOException {
 //        Stage stage = new Stage();
 //        if(backUpStage!=null)backUpStage.close();
-        backUpStage=openWindow(backUpStage,"../view/utillity/BackupForm.fxml","Backup Database","image/stageImage/backup.png");
+        backUpStage=openWindow(backUpStage,"/view/utillity/BackupForm.fxml","Backup Database","image/stageImage/backup.png");
 //        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/BackupForm.fxml"))));
 //        stage.setTitle("Backup Database");
 //        stage.setResizable(false);
@@ -207,7 +207,7 @@ public class HomePageFormContoller {
     public void manageCustomerOnAction(ActionEvent actionEvent) throws IOException {
 //        Stage stage = new Stage();
 //        if(customerStage!=null)customerStage.close();
-        customerStage =openWindow(customerStage,"../view/utillity/ManageCustomerForm.fxml","Manage Customer","image/hamburgerOpenPage/addUser.png");
+        customerStage =openWindow(customerStage,"/view/utillity/ManageCustomerForm.fxml","Manage Customer","image/hamburgerOpenPage/addUser.png");
 //        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/utillity/ManageCustomerForm.fxml"))));
 //        stage.setTitle("Manage Customer");
 //        stage.setResizable(false);
@@ -218,12 +218,12 @@ public class HomePageFormContoller {
 
     private Stage masterReportStage;
     public void itemRevenuesOnAction(ActionEvent actionEvent) throws IOException {
-        masterReportStage = openWindow(masterReportStage,"../view/mainTask/ MasterReport.fxml","Master Report","image/stageImage/masterReport.png");
+        masterReportStage = openWindow(masterReportStage,"/view/mainTask/ MasterReport.fxml","Revenues Master Form","image/stageImage/masterReport.png");
     }
 
     private  Stage stockAdjusment;
     public void StockAdjusmentOnAction(ActionEvent actionEvent) throws IOException {
-        stockAdjusment = openWindow(stockAdjusment,"../view/mainTask/StockAdjusment.fxml","Stock Adjusment","image/stageImage/stock.png");
+        stockAdjusment = openWindow(stockAdjusment,"/view/mainTask/StockAdjusment.fxml","Stock Adjusment","image/stageImage/stock.png");
     }
 
     private Stage openWindow(Stage oldStage , String pageUrl ,String title , String imageUrl) throws IOException {
@@ -240,31 +240,31 @@ public class HomePageFormContoller {
 
     private Stage seeBillForm;
     public void itemSeeBillFormOnAction(ActionEvent event) throws IOException {
-        seeBillForm = openWindow(seeBillForm,"../view/mainTask/SeeBillForm.fxml","See Bill Form","image/hamburgerOpenPage/seeBill.png");
+        seeBillForm = openWindow(seeBillForm,"/view/mainTask/SeeBillForm.fxml","See Bill Form","image/hamburgerOpenPage/seeBill.png");
     }
 
     private Stage supplierMasterForm;
     public void itemSupplierMasterOnAction(ActionEvent event) throws IOException {
-        supplierMasterForm = openWindow(supplierMasterForm,"../view/mainTask/stockManageForm.fxml","Supplier Master Form","image/hamburgerOpenPage/Supplier.png");
+        supplierMasterForm = openWindow(supplierMasterForm,"/view/mainTask/stockManageForm.fxml","Supplier Master Form","image/hamburgerOpenPage/Supplier.png");
     }
 
     private Stage manageItemsForm;
     public void itemManageItemsOnAction(ActionEvent event) throws IOException {
-        manageItemsForm = openWindow(manageItemsForm,"../view/mainTask/AddDeleteItemForm.fxml","Manage Items Form","image/hamburgerOpenPage/addItem.png");
+        manageItemsForm = openWindow(manageItemsForm,"/view/mainTask/AddDeleteItemForm.fxml","Manage Items Form","image/hamburgerOpenPage/addItem.png");
     }
 
     private Stage manageUserForm;
     public void itemManageUsersOnAction(ActionEvent event) throws IOException {
-        manageUserForm = openWindow(manageUserForm,"../view/mainTask/AddUserForm.fxml","Manage User Form","image/hamburgerOpenPage/addUser.png");
+        manageUserForm = openWindow(manageUserForm,"/view/mainTask/AddUserForm.fxml","Manage User Form","image/hamburgerOpenPage/addUser.png");
     }
 
     private Stage SaleForm;
     public void itemSaleFormContoller(ActionEvent event) throws IOException {
-        SaleForm = openWindow(SaleForm,"../view/mainTask/SaleForm.fxml","Manage User Form","image/hamburgerOpenPage/sale.png");
+        SaleForm = openWindow(SaleForm,"/view/mainTask/SaleForm.fxml","Sale Form","image/hamburgerOpenPage/sale.png");
     }
 
     private Stage saleQtyForm;
     public void itemSaleOnAction(ActionEvent event) throws IOException {
-        SaleForm = openWindow(saleQtyForm,"../view/mainTask/MasterReportForSaleForm.fxml","Sales Master Form","image/stageImage/sales.png");
+        saleQtyForm = openWindow(saleQtyForm,"/view/mainTask/MasterReportForSaleForm.fxml","Sales Master Form","image/stageImage/sales.png");
     }
 }

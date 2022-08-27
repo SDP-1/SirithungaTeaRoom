@@ -360,7 +360,7 @@ public class SaleFormContoller {
 
         Stage stage = new Stage();
         ManyItemTopUpWindowFormContoller.resultSet = resultSet;
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/mainTask/ManyItemTopUpWindowForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/mainTask/ManyItemTopUpWindowForm.fxml"))));
         stage.setTitle("SELECT ITEM");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
@@ -972,7 +972,7 @@ public class SaleFormContoller {
                 ShowLastBillDeatailsFormContoller.isOwner = isOwner;
                 Stage stage = new Stage();
                 ShowLastBillDeatailsFormContoller.invoiceNo = invoiceNo;
-                stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/mainTask/ShowLastBillDeatailsForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/mainTask/ShowLastBillDeatailsForm.fxml"))));
                 stage.setResizable(false);
                 stage.getIcons().add(new Image("image/hamburgerOpenPage/seeBill.png"));
                 stage.centerOnScreen();

@@ -1,10 +1,13 @@
 package db;
 
+import Query.PathTableQuery;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.CodeSource;
+import java.sql.SQLException;
 
 public class DBUtill {
 
@@ -15,10 +18,11 @@ public class DBUtill {
             String dbUser = "root";
             String dbPass = "1234";
 
-            CodeSource codeSource = AutoBackUp.class.getProtectionDomain().getCodeSource();
-            File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            String jarDir = jarFile.getParentFile().getParentFile().getParentFile().getPath();
-            String folderPath = jarDir + "\\utill\\Mysqldump\\mysqldump.exe";
+//            CodeSource codeSource = AutoBackUp.class.getProtectionDomain().getCodeSource();
+//            File jarFile = new File(codeSource.getLocation().toURI().getPath());
+//            String jarDir = jarFile.getParentFile().getParentFile().getParentFile().getPath();
+//            String folderPath = jarDir + "\\utill\\Mysqldump\\mysqldump.exe";
+            String folderPath = PathTableQuery.getmysqlduplocation() + "\\mysqldump.exe";
 
             String savePath = location + "\\" + filename + ".sql";
 
@@ -30,7 +34,7 @@ public class DBUtill {
 
             return processComplete == 0;
 
-        } catch (IOException | InterruptedException | URISyntaxException ex) {
+        } catch (IOException | InterruptedException | SQLException | ClassNotFoundException ex ) {
             return false;
         }
     }
@@ -43,19 +47,21 @@ public class DBUtill {
 
             String restorePath = filename;
 
-            CodeSource codeSource = AutoBackUp.class.getProtectionDomain().getCodeSource();
-            File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            String jarDir = jarFile.getParentFile().getPath();
-            String folderPath = jarDir + "\\Mysql\\mysql.exe";
+//            CodeSource codeSource = AutoBackUp.class.getProtectionDomain().getCodeSource();
+//            File jarFile = new File(codeSource.getLocation().toURI().getPath());
+//            String jarDir = jarFile.getParentFile().getPath();
+//            String folderPath = jarDir + "\\Mysql\\mysql.exe";
 
-            String[] executeCmd = new String[]{folderPath, "--user=" + dbUser, "--password=" + dbPass, "-e", "source " + restorePath};
+            String folderPath = PathTableQuery.getMySqlLocation()+"\\mysql.exe";
+
+                    String[] executeCmd = new String[]{folderPath, "--user=" + dbUser, "--password=" + dbPass, "-e", "source " + restorePath};
 
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
 
             return processComplete == 0;
 
-        } catch (IOException | InterruptedException | HeadlessException | URISyntaxException ex) {
+        } catch (IOException | InterruptedException | HeadlessException | SQLException | ClassNotFoundException ex) {
             return false;
         }
     }

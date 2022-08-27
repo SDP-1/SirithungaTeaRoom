@@ -722,7 +722,7 @@ public class AddDeleteItemFormContoller {
 
         Stage stage = new Stage();
         ManyItemTopUpWindowFormContoller.resultSet = resultSet;
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/mainTask/ManyItemTopUpWindowForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/mainTask/ManyItemTopUpWindowForm.fxml"))));
         stage.setTitle("SELECT ITEM");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();

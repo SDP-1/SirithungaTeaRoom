@@ -115,31 +115,31 @@ public class OwnerHamburgerFormcontoller {
 
     public void btnSeeBillOnAction(ActionEvent actionEvent) throws IOException {
         darkButton = btnseeBill;
-        loadPage("../view/mainTask/SeeBillForm.fxml");
+        loadPage("/view/mainTask/SeeBillForm.fxml");
         close();
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) throws IOException {
         darkButton = btnSearch;
-        loadPage("../view/mainTask/stockManageForm.fxml");
+        loadPage("/view/mainTask/stockManageForm.fxml");
         close();
     }
 
     public void btnSaleOnAction(ActionEvent actionEvent) throws IOException {
         darkButton = btnSale;
-        loadPage("../view/mainTask/SaleForm.fxml");
+        loadPage("/view/mainTask/SaleForm.fxml");
         close();
     }
 
     public void btnAddDeleteItemOnAction(ActionEvent actionEvent) throws IOException {
         darkButton = btnAddDeleteItem;
-        loadPage("../view/mainTask/AddDeleteItemForm.fxml");
+        loadPage("/view/mainTask/AddDeleteItemForm.fxml");
         close();
     }
 
     public void btnAddDeleteUserOnAction(ActionEvent actionEvent) throws IOException {
         darkButton = btnAddDeleteUser;
-        loadPage("../view/mainTask/AddUserForm.fxml");
+        loadPage("/view/mainTask/AddUserForm.fxml");
         close();
     }
 

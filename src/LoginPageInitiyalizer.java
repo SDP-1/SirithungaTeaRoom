@@ -15,7 +15,7 @@ public class LoginPageInitiyalizer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/PreLoder/PreLoderForm.fxml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/PreLoder/PreLoderForm.fxml"))));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.centerOnScreen();
         PreLoderFormContoller.preloderStage = primaryStage;

@@ -183,7 +183,7 @@ public class StockAdjusmentController {
 
         Stage stage = new Stage();
         StockAdjusmentTopUpWindowContoller.itemList = items;
-        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/mainTask/StockAdjusmentTopUpWindowForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/mainTask/StockAdjusmentTopUpWindowForm.fxml"))));
         stage.setTitle("SELECT ITEM");
         stage.initStyle(StageStyle.UNDECORATED);
 

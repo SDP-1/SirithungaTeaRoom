@@ -74,10 +74,17 @@ public class LoginPageFormContoller {
         if (pwdPassword.getText().equals("rootrootroot") && txtUserName.getText().equals("rootrootroot")) {
             BackupFormContoller.userName = txtUserName.getText();
             Stage stage = new Stage();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/utillity/BackupForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/utillity/BackupForm.fxml"))));
             stage.setTitle("Backup Database");
             stage.getIcons().add(new Image("image/stageImage/backup.png"));
             stage.show();
+
+            Stage stage2 = new Stage();
+            stage2.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/utillity/SetPathForm.fxml"))));
+            stage2.setTitle("Set Path");
+            stage2.getIcons().add(new Image("image/stageImage/backup.png"));
+            stage2.show();
+
             close();
             return;
         }
@@ -88,7 +95,7 @@ public class LoginPageFormContoller {
                 if (password != null) {
                     if (password.equals(pwdPassword.getText())) {
                         StockManageBill.username = BackupFormContoller.userName = HomePageFormContoller.userName =SaleFormContoller.cashierName = txtUserName.getText();
-                        load("../view/homePage/HomePageForm.fxml");
+                        load("/view/homePage/HomePageForm.fxml");
                         close();
                         return;
                     }

@@ -52,7 +52,7 @@ public class PreLoderFormContoller {
                 if(presentage==100){
                     Stage stage = new Stage();
                     try {
-                        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("../view/LoginPageForm.fxml"))));
+                        stage.setScene(new Scene(FXMLLoader.load(LoginPageFormContoller.class.getResource("/view/LoginPageForm.fxml"))));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
