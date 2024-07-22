@@ -1,4 +1,41 @@
-# Sirithunga-TeaRoom
+# Store Administration System
+
+## Overview
+
+The Store Administration System is a comprehensive Point-of-Sale (POS) application designed to streamline retail and wholesale operations. Developed in Java with JavaFX for the user interface, MySQL for database management, and Jasper Reports for reporting, this system utilizes the Model-View-Controller (MVC) architecture to ensure a clean separation of concerns and efficient management of data and UI components.
+
+## Features
+
+- **Retail and Wholesale Billing Interfaces**: Seamless transitions between retail and wholesale billing.
+- **Comprehensive Management Modules**:
+  - View and manage past bills.
+  - Manage suppliers, stock, and items.
+  - System user management.
+- **Customer Management**: Integrated functionalities for managing customer information.
+- **Keyboard Shortcuts**: Enhanced user experience through various keyboard shortcuts.
+- **Intelligent Search Bars**: Efficient lookup of items and customer details.
+- **Database Backup**:
+  - Manual and automated backup options for database security.
+  - Restoration capabilities for super administrators in case of data loss or failure.
+- **Robust Security**: Extensive validation and security measures implemented throughout the system.
+
+## Technology Stack
+
+- **Java**: Core programming language used for application development.
+- **JavaFX**: Framework for building the graphical user interface.
+- **MySQL**: Relational database management system for data storage.
+- **Jasper Reports**: Reporting tool for generating detailed reports.
+- **MVC Architecture**: Model-View-Controller pattern to separate data, user interface, and control logic.
+
+## Installation
+
+To set up the Store Administration System on your local machine, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/SirithungaTeaRoom.git
+
+##Sample Screenshots
 
 ![Screenshot 2024-07-10 095254](https://github.com/SDP-1/SirithungaTeaRoom/assets/98279413/5ef9dc85-0a37-49c3-95da-5c0e66aaa5a9)
 
