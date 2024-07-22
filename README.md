@@ -35,7 +35,7 @@ To set up the Store Administration System on your local machine, follow these st
    ```bash
    git clone https://github.com/yourusername/SirithungaTeaRoom.git
 
-##Sample Screenshots
+## Sample Screenshots
 
 ![Screenshot 2024-07-10 095254](https://github.com/SDP-1/SirithungaTeaRoom/assets/98279413/5ef9dc85-0a37-49c3-95da-5c0e66aaa5a9)
 
